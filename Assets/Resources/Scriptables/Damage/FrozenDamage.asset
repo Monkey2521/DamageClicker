@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c196df55f42375f4b99fcbd29c5ecdc8, type: 3}
   m_Name: FrozenDamage
   m_EditorClassIdentifier: 
-  _name: 
-  _instantDamageValue: 0
-  _speedSlowMultiplier: 0
-  _slowTime: 0
+  _isDebug: 0
+  _name: Speed slower
+  _instantDamageValue: 1
+  _damagePrefab: {fileID: 0}
+  _areaRange: 1
+  _damageLifetime: 1.5
+  _speedSlowMultiplier: 0.25
+  _slowTime: 3

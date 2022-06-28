@@ -5,16 +5,21 @@ public abstract class Damage : ScriptableObject
     protected Damage _additionalDamage;
 
     [Header("Debug settings")]
-    protected bool _isDebug;
+    [SerializeField] protected bool _isDebug;
 
     [Header("Settings")]
     [SerializeField] protected string _name;
-    [SerializeField][Range(0.1f, 100f)] protected float _instantDamageValue;
-
     public string Name => _name;
-    public float DamageValue => _instantDamageValue;
+
+    [SerializeField][Range(0.1f, 100f)] protected float _instantDamageValue;
+    public float InstantDamageValue => _instantDamageValue;
 
     public void Init()
+    {
+
+    }
+
+    public void Upgrade()
     {
 
     }
@@ -28,9 +33,7 @@ public abstract class Damage : ScriptableObject
     }
 
     public void MakeDamage(IDamageable target)
-    {
-        if (_isDebug) Debug.Log("Deal " + _name + ": " + _instantDamageValue);
-
+    { 
         target.TakeDamage(this);
         MakeDamageEffect(target);
 

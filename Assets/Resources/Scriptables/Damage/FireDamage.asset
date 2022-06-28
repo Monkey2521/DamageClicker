@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14afde2028e9a28488820d7c64db012d, type: 3}
   m_Name: FireDamage
   m_EditorClassIdentifier: 
-  _name: 
-  _instantDamageValue: 0
-  _fireDamagePerSecond: 0
-  _burningTime: 0
+  _isDebug: 0
+  _name: FIRE
+  _instantDamageValue: 5
+  _damagePrefab: {fileID: 0}
+  _areaRange: 1
+  _damageLifetime: 2
+  _fireDamagePerSecond: 7
+  _burningTime: 3

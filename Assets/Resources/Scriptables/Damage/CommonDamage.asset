@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9700d845b7f87f04985b17acb22cbcd7, type: 3}
   m_Name: CommonDamage
   m_EditorClassIdentifier: 
-  _name: 
-  _instantDamageValue: 0
+  _isDebug: 0
+  _name: Just damage
+  _instantDamageValue: 15
