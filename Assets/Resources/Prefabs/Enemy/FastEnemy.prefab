@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 6195382756756420378}
   - component: {fileID: -7712393327809052000}
   - component: {fileID: 2391886724466707575}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FastEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,6 +128,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Fast enemy
   _stats:
+    _maxHP: 15
     MaxHP: 15
     HP: 0
     _speed: 13
+    Speed: 0
+    _scoreReward: 3

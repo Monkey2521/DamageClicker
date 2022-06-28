@@ -8,16 +8,19 @@ public sealed class WorldBuilder : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] GameObject _groundPrefab;
+    [SerializeField] GameObject _wallPrefab;
     [SerializeField][Range(1, 5)] int _groundBoxSize;
 
     [Space(5)]
     [SerializeField] Transform _groundParent;
 
     List<GameObject> _ground = new List<GameObject>();
+    List<GameObject> _walls = new List<GameObject>();
 
     readonly float GROUND_BOX_RADIUS = 5f;
     readonly float DELTA_GROUND_POSITION = 10f;
     readonly float EVEN_GROUND_POSITION = 5f;
+    readonly float WALL_Y_POSITION = 1.5f;
 
     public static float MAX_SPAWN_POSITION { get; private set; }
 
@@ -33,8 +36,11 @@ public sealed class WorldBuilder : MonoBehaviour
         {
             foreach (GameObject ground in _ground)
                 Destroy(ground);
+            foreach (GameObject wall in _walls)
+                Destroy(wall);
 
             _ground.Clear();
+            _walls.Clear();
         }
 
         int posMultiplier = (_groundBoxSize - 1) / 2;
@@ -60,6 +66,38 @@ public sealed class WorldBuilder : MonoBehaviour
                     );
 
                 _ground.Add(Instantiate(_groundPrefab, position, Quaternion.identity, _groundParent));
+
+                #region Wall placing
+                if (i == 0)
+                    _walls.Add(Instantiate(_wallPrefab, position + new Vector3
+                        (
+                            -GROUND_BOX_RADIUS,
+                            WALL_Y_POSITION,
+                            0f
+                        ), Quaternion.identity, _groundParent));
+                if (i == _groundBoxSize - 1)
+                    _walls.Add(Instantiate(_wallPrefab, position + new Vector3
+                        (
+                            GROUND_BOX_RADIUS,
+                            WALL_Y_POSITION,
+                            0f
+                        ), Quaternion.identity, _groundParent));
+
+                if (j == 0)
+                    _walls.Add(Instantiate(_wallPrefab, position + new Vector3
+                        (
+                            0f,
+                            WALL_Y_POSITION,
+                            GROUND_BOX_RADIUS
+                        ), Quaternion.Euler(0f, 90f, 0f), _groundParent));
+                if (j == _groundBoxSize - 1)
+                    _walls.Add(Instantiate(_wallPrefab, position + new Vector3
+                        (
+                            0f,
+                            WALL_Y_POSITION,
+                            -GROUND_BOX_RADIUS
+                        ), Quaternion.Euler(0f, 90f, 0f), _groundParent));
+                #endregion
             }
     }
 }

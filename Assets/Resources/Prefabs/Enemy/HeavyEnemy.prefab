@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 5020464094318095471}
   - component: {fileID: -984757643343106923}
   - component: {fileID: 5456330867585488128}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeavyEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,6 +128,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Heavy enemy
   _stats:
+    _maxHP: 100
     MaxHP: 100
     HP: 0
     _speed: 2.5
+    Speed: 0
+    _scoreReward: 10

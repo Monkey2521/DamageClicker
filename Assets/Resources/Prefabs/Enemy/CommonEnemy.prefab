@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 803920503434668104}
   - component: {fileID: 267120507713475684}
   - component: {fileID: 5315313045766843335}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CommonEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,6 +127,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Common enemy
   _stats:
+    _maxHP: 40
     MaxHP: 40
     HP: 0
     _speed: 5
+    Speed: 0
+    _scoreReward: 5

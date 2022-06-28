@@ -16,9 +16,9 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable
 
     public ObjectPool Pool { get; set; }
 
-    public virtual void Init()
+    public virtual void Init(float difficultyMultiplier)
     {
-        _stats.Init();
+        _stats.Init(difficultyMultiplier);
     }
 
     public virtual void Move()

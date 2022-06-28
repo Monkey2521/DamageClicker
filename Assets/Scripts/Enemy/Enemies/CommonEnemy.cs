@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CommonEnemy : Enemy
+public sealed class CommonEnemy : Enemy
 {
 
 }
