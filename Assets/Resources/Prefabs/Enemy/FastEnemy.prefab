@@ -131,7 +131,7 @@ MonoBehaviour:
     _maxHP: 15
     MaxHP: 15
     HP: 0
-    _speed: 9
+    _speed: 10
     Speed: 0
     _scoreReward: 3
   _rigidbody: {fileID: -1781702358038193946}

@@ -53,7 +53,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable
 
         if (HP <= 0)
         {
-
+            ReturnToPool();
         }
     }
 

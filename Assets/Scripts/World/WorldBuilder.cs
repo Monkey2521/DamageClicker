@@ -9,7 +9,7 @@ public sealed class WorldBuilder : MonoBehaviour
     [Header("Settings")]
     [SerializeField] GameObject _groundPrefab;
     [SerializeField] GameObject _wallPrefab;
-    [SerializeField][Range(1, 5)] int _groundBoxSize;
+    [SerializeField][Range(1, 50)] int _groundBoxSize;
 
     [Space(5)]
     [SerializeField] Transform _groundParent;
