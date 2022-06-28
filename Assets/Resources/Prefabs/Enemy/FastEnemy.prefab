@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3867258160377080493}
   - component: {fileID: 4690462945902654307}
   - component: {fileID: 6195382756756420378}
-  - component: {fileID: -7712393327809052000}
+  - component: {fileID: -1781702358038193946}
   - component: {fileID: 2391886724466707575}
   m_Layer: 6
   m_Name: FastEnemy
@@ -28,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3817847053124088223}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3867258160377080493
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -98,7 +98,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &-7712393327809052000
+--- !u!54 &-1781702358038193946
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,7 +112,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &2391886724466707575
 MonoBehaviour:
@@ -131,6 +131,7 @@ MonoBehaviour:
     _maxHP: 15
     MaxHP: 15
     HP: 0
-    _speed: 13
+    _speed: 9
     Speed: 0
     _scoreReward: 3
+  _rigidbody: {fileID: -1781702358038193946}

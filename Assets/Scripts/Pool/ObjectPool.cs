@@ -7,6 +7,7 @@ public sealed class ObjectPool
 
     List<IPoolable> _pool;
     List<IPoolable> _pulledObjects;
+    public List<IPoolable> PulledObjects => _pulledObjects;
 
     public bool IsEmpty => _pool.Count == 0;
 
@@ -16,6 +17,16 @@ public sealed class ObjectPool
         _pulledObjects = new List<IPoolable>();
 
         _isDebug = isDebug;
+    }
+
+    public List<IPoolable> Reset()
+    {
+        ReturnAllToPool();
+
+        List<IPoolable> pool = new List<IPoolable>(_pool);
+        _pool.Clear();
+
+        return pool;
     }
 
     public void AddObject(IPoolable poolable)

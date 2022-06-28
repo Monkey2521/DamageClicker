@@ -536,7 +536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4da3e7d9ead851e46959a0622a952a9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isDebug: 0
+  _isDebug: 1
   _groundPrefab: {fileID: 2080448310883509931, guid: eb9cfe41a75fabc4e8ed32af0aa7adda, type: 3}
   _wallPrefab: {fileID: 5369003481732437895, guid: e14ea2d32911d2a4b9bafd64ca88b36c, type: 3}
   _groundBoxSize: 3
@@ -553,11 +553,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed1ff8335a2612b4fa9ceb74d5f76a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isDebug: 1
+  _isDebug: 0
   _enemiesPools:
   - _prefab: {fileID: 2391886724466707575, guid: 35e1ea550bcdbee4dafb4283960d7a53, type: 3}
     _size: 4
-  - _prefab: {fileID: 5315313045766843335, guid: fc84087e9ccdbec4c8c837688f373762, type: 3}
+  - _prefab: {fileID: -4499201893774745835, guid: fc84087e9ccdbec4c8c837688f373762, type: 3}
     _size: 3
   - _prefab: {fileID: 5456330867585488128, guid: 286ba4c9e36fb7448ac752acb4530d8e, type: 3}
     _size: 2

@@ -51,7 +51,7 @@ public sealed class WorldBuilder : MonoBehaviour
                 (_groundBoxSize % 2 == 0 ? EVEN_GROUND_POSITION : 0) + DELTA_GROUND_POSITION * posMultiplier
             );
 
-        MAX_SPAWN_POSITION = -(startPosition.x - GROUND_BOX_RADIUS * 0.75f);
+        MAX_SPAWN_POSITION = -(startPosition.x - GROUND_BOX_RADIUS * 0.5f);
 
         if (_isDebug) Debug.Log("Building ground...");
 

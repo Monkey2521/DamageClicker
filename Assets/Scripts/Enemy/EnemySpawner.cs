@@ -21,6 +21,10 @@ public sealed class EnemySpawner : MonoBehaviour
 
     void Init()
     {
+        if (_pool != null)
+            foreach (Enemy enemy in _pool.Reset())
+                Destroy(enemy);
+
         _pool = new ObjectPool(_isDebug);
         
         foreach(EnemyPool enemyPool in _enemiesPools)
@@ -32,6 +36,17 @@ public sealed class EnemySpawner : MonoBehaviour
             }
     }
 
+    void FixedUpdate()
+    {
+        foreach(Enemy enemy in _pool.PulledObjects)
+        {
+            if (enemy.OnTarget)
+                enemy.SetTargetPosition(GetRandomPosition());
+
+            enemy.Move();
+        }
+    }
+
     [ContextMenu("Spawn enemy")]
     void Spawn()
     {
@@ -40,6 +55,8 @@ public sealed class EnemySpawner : MonoBehaviour
         if (enemy == null) return; // TODO 
 
         enemy.transform.position = GetRandomPosition();
+        enemy.Init(1f);
+        enemy.SetTargetPosition(GetRandomPosition());
     }
 
     Vector3 GetRandomPosition() => new Vector3
