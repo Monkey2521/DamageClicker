@@ -19,8 +19,13 @@ public sealed class EnemySpawner : MonoBehaviour
     [SerializeField] Transform _enemiesParent;
 
     ObjectPool _pool;
-    bool _isSpawning;
+    Events _events;
 
+    bool _isSpawning;
+    public bool IsSpawning => _isSpawning;
+
+    [Header("UI settings")]
+    [SerializeField] MonsterCounter _counter;
 
     void Start()
     {
@@ -42,6 +47,10 @@ public sealed class EnemySpawner : MonoBehaviour
 
                 _pool.AddObject(enemy);
             }
+
+        _counter.Init();
+
+        if (_events == null) _events = Events.GetInstance;
     }
 
     void FixedUpdate()
@@ -67,11 +76,18 @@ public sealed class EnemySpawner : MonoBehaviour
     {
         Enemy enemy = _pool.PullObject() as Enemy;
 
-        if (enemy == null) return; // TODO 
-
+        if (enemy == null)
+        {
+            _counter.UpdateMonsterCounter(_pool.PulledObjects.Count);
+            _events.OnGameOver?.Invoke();
+            return;
+        }
+            
         enemy.transform.position = GetRandomPosition();
         enemy.Init(1f);
         enemy.SetTargetPosition(GetRandomPosition());
+
+        _counter.UpdateMonsterCounter(_pool.PulledObjects.Count);
 
         WaitSpawn();
     }

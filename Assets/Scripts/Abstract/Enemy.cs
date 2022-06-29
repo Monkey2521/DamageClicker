@@ -14,6 +14,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable
     public float HP => _stats.HP;
     public float MaxHP => _stats.MaxHP;
     public float Speed => _stats.Speed;
+    public int ScoreReward => _stats.ScoreReward;
 
     public ObjectPool Pool { get; set; }
 
@@ -27,9 +28,13 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable
         }
     }
 
+    protected Events _events;
+
     public virtual void Init(float difficultyMultiplier)
     {
         _stats.Init(difficultyMultiplier);
+
+        if (_events == null) _events = Events.GetInstance;
     }
 
     public virtual void Move()
@@ -53,6 +58,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable
 
         if (HP <= 0)
         {
+            _events.OnEnemyKilled?.Invoke(this);
             ReturnToPool();
         }
     }

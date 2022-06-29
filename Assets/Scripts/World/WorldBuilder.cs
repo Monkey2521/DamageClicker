@@ -30,7 +30,7 @@ public sealed class WorldBuilder : MonoBehaviour
     }
 
     [ContextMenu("Reset world")]
-    async void ResetWorld()
+    void ResetWorld()
     {
         if (_ground.Count > 0)
         {
@@ -66,8 +66,6 @@ public sealed class WorldBuilder : MonoBehaviour
                     );
 
                 _ground.Add(Instantiate(_groundPrefab, position, Quaternion.identity, _groundParent));
-
-                await System.Threading.Tasks.Task.Delay(250);
 
                 #region Wall placing
                 if (i == 0)
