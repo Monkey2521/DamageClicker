@@ -7,10 +7,14 @@ public sealed class PlayerController : MonoBehaviour
     [SerializeField] bool _isDebug;
 
     [Header("Settings")]
+    [SerializeField] float _difficultyUpgradePerMonster;
     [SerializeField] Damage _damage;
 
     static float _difficultyMultiplier;
     public static float DifficultyMultiplier => _difficultyMultiplier;
+
+    [Header("UI settings")]
+    [SerializeField] GameObject _startGameButton;
 
     Events _events;
 
@@ -18,17 +22,20 @@ public sealed class PlayerController : MonoBehaviour
     {
         _events = Events.GetInstance;
 
-        _events.OnGameStart.AddListener(Init);
         _events.OnEnemyKilled.AddListener(UpdateDifficulty);
     }
 
-    void Init()
+    public void StartGame()
     {
         _difficultyMultiplier = 1f;
+
+        _events.OnGameStart?.Invoke();
+
+        _startGameButton.SetActive(false);
     }
 
     void UpdateDifficulty(Enemy enemy)
     {
-
+        _difficultyMultiplier += _difficultyUpgradePerMonster;
     }
 }

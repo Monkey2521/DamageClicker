@@ -19,11 +19,6 @@ public abstract class Damage : ScriptableObject
 
     }
 
-    public void Upgrade()
-    {
-
-    }
-
     public void AddDamage(Damage damage)
     {
         if (_additionalDamage == null)

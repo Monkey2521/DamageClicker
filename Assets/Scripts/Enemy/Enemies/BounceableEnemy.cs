@@ -29,13 +29,14 @@ public sealed class BounceableEnemy : Enemy
     void OnCollisionEnter(Collision collision)
     {
         if (_isDebug) Debug.Log(_name + " on collision with " + collision.collider.name);
+        
+        if (collision.collider.tag == Tags.Ground)
+            _onGround = true;
 
-        if (!_onCompression && collision.collider.tag == Tags.Ground)
+        if (!_onCompression && _onGround)
         {
             _onCompression = true;
             _animator.SetBool("Compressing", true);
-
-            _onGround = true;
         }
     }
 

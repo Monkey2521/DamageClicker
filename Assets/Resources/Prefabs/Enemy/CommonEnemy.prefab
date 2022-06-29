@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cd9d976a9bd1954ab705c32cb7bf26e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isDebug: 1
+  _isDebug: 0
   _name: Common enemy
   _stats:
     _maxHP: 40
