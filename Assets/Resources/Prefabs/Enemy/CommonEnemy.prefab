@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 803920503434668105}
   - component: {fileID: 803920503434668104}
   - component: {fileID: 5707094621290241445}
+  - component: {fileID: -26201902373812258}
   - component: {fileID: -4499201893774745835}
   m_Layer: 6
   m_Name: CommonEnemy
@@ -114,6 +115,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!95 &-26201902373812258
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803920503434668151}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6d64d41ce260e654b9a0ad57529eb42f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &-4499201893774745835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cd9d976a9bd1954ab705c32cb7bf26e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isDebug: 1
   _name: Common enemy
   _stats:
     _maxHP: 40
@@ -136,10 +157,7 @@ MonoBehaviour:
     _scoreReward: 5
   _rigidbody: {fileID: 5707094621290241445}
   _health: {fileID: 2590208436436252733}
-  _groundMask:
-    serializedVersion: 2
-    m_Bits: 128
-  _rayDistance: 0.5001
+  _animator: {fileID: -26201902373812258}
   _bounceForce: 25
 --- !u!1001 &21977643321727473
 PrefabInstance:

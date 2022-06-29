@@ -182,7 +182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 42560262}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 263870678}
   - component: {fileID: 263870677}
   - component: {fileID: 263870675}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MonsterCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 361666342}
   - component: {fileID: 361666344}
   - component: {fileID: 361666343}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ScoreIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +415,7 @@ GameObject:
   - component: {fileID: 551776612}
   - component: {fileID: 551776613}
   - component: {fileID: 551776614}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CurrentCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,7 +493,7 @@ GameObject:
   m_Component:
   - component: {fileID: 567300967}
   - component: {fileID: 567300968}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -675,7 +675,7 @@ GameObject:
   - component: {fileID: 936741637}
   - component: {fileID: 936741636}
   - component: {fileID: 936741635}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -774,7 +774,7 @@ GameObject:
   - component: {fileID: 936814301}
   - component: {fileID: 936814300}
   - component: {fileID: 936814299}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MaxCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -885,7 +885,6 @@ MonoBehaviour:
   - _prefab: {fileID: 8178192058023380788, guid: 7eb917477ee196d43a7026e89546e96b, type: 3}
     _size: 1
   _enemiesParent: {fileID: 181014111}
-  _counter: {fileID: 263870675}
 --- !u!4 &963031635
 Transform:
   m_ObjectHideFlags: 0
@@ -1036,6 +1035,9 @@ MonoBehaviour:
   OnGameOver:
     m_PersistentCalls:
       m_Calls: []
+  OnEnemySpawned:
+    m_PersistentCalls:
+      m_Calls: []
   OnEnemyKilled:
     m_PersistentCalls:
       m_Calls: []
@@ -1128,6 +1130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1554915822}
+  - component: {fileID: 1554915823}
   m_Layer: 0
   m_Name: GameControls
   m_TagString: Untagged
@@ -1151,6 +1154,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1554915823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554915821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f5c085fe099d8941a18cec062fba36d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isDebug: 0
+  _damage: {fileID: 11400000, guid: 939158e15fe4529478753ac93760262d, type: 2}
 --- !u!1 &1945332513
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,7 +1179,7 @@ GameObject:
   - component: {fileID: 1945332514}
   - component: {fileID: 1945332516}
   - component: {fileID: 1945332515}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ScoreCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}

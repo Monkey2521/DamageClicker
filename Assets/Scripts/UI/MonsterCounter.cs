@@ -11,9 +11,20 @@ public class MonsterCounter : MonoBehaviour
 
     [SerializeField] Text _scoreCount;
     int _score;
-    int _totalScore;
+    public int TotalScore { get; private set; }
 
     Events _events;
+
+    void Start()
+    {
+        Init();
+
+        _events = Events.GetInstance;
+
+        _events.OnGameStart.AddListener(Init);
+        _events.OnEnemyKilled.AddListener(OnKilledUpdate);
+        _events.OnEnemySpawned.AddListener(OnSpawnedUpdate);
+    }
 
     public void Init()
     {
@@ -26,27 +37,23 @@ public class MonsterCounter : MonoBehaviour
         _maxMonsterCount.color = Color.green;
 
         _score = 0;
-        _totalScore = 0;
+        TotalScore = 0;
         _scoreCount.text = "0";
 
         _animator.SetBool("OnDanger", false);
 
-        if (_events == null)
-        {
-            _events = Events.GetInstance;
-            _events.OnEnemyKilled.AddListener(UpdateCounters);
-        } 
+        
     }
 
-    public void UpdateMonsterCounter(int count)
+    public void UpdateMonsterCounter()
     {
-        if (count < 4)
+        if (_monsterCount < 4)
         {
             _currentMonsterCount.color = Color.green;
             _maxMonsterCount.color = Color.green;
             _animator.SetBool("OnDanger", false);
         }
-        else if (count < 8)
+        else if (_monsterCount < 8)
         {
             _currentMonsterCount.color = Color.yellow;
             _maxMonsterCount.color = Color.yellow;
@@ -60,22 +67,28 @@ public class MonsterCounter : MonoBehaviour
             _animator.SetBool("OnDanger", true);
         }
 
-        _currentMonsterCount.text = count.ToString();
-        _monsterCount = count;
+        _currentMonsterCount.text = _monsterCount.ToString();
     }
 
-    void UpdateCounters(Enemy enemy)
+    void OnSpawnedUpdate(Enemy enemy)
+    {
+        _monsterCount++;
+
+        UpdateMonsterCounter();
+    }
+
+    void OnKilledUpdate(Enemy enemy)
     {
         _monsterCount--;
 
-        UpdateMonsterCounter(_monsterCount);
+        UpdateMonsterCounter();
         AddScore(enemy.ScoreReward);
     }
 
     void AddScore(int score)
     {
         _score += score;
-        _totalScore += score;
+        TotalScore += score;
 
         _scoreCount.text = _score.ToString();
     }

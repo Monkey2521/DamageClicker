@@ -5,7 +5,6 @@ public class EnemyStats
 {
     [SerializeField][Range(0.1f, 200f)] float _maxHP;
     [HideInInspector] public float MaxHP;
-
     [HideInInspector] public float HP;
 
     [SerializeField][Range(0.1f, 20f)] float _speed;

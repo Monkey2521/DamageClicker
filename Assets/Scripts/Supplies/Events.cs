@@ -6,6 +6,7 @@ public sealed class Events : MonoBehaviour
     public UnityEvent OnGameStart;
     public UnityEvent OnGameOver;
 
+    public UnityEvent<Enemy> OnEnemySpawned;
     public UnityEvent<Enemy> OnEnemyKilled;
 
     static Events _instance;
@@ -20,5 +21,11 @@ public sealed class Events : MonoBehaviour
         }
         else
             _instance = this;
+    }
+
+    [ContextMenu("Start game")]
+    public void StartGame()
+    {
+        OnGameStart?.Invoke();
     }
 }

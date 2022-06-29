@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable
 {
     [Header("Debug settings")]
-    protected bool _isDebug;
+    [SerializeField] protected bool _isDebug;
 
     [Header("Settings")]
     [SerializeField] protected string _name;

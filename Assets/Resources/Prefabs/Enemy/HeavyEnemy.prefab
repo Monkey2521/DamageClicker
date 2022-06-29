@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9576954e7ff76a64c82c584dce6841e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isDebug: 0
   _name: Heavy enemy
   _stats:
     _maxHP: 100

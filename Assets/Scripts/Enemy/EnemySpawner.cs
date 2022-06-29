@@ -1,5 +1,5 @@
+using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public sealed class EnemySpawner : MonoBehaviour
@@ -24,12 +24,12 @@ public sealed class EnemySpawner : MonoBehaviour
     bool _isSpawning;
     public bool IsSpawning => _isSpawning;
 
-    [Header("UI settings")]
-    [SerializeField] MonsterCounter _counter;
-
     void Start()
     {
         Init();
+
+        _events = Events.GetInstance;
+        _events.OnGameStart.AddListener(EnableSpawning);
     }
 
     void Init()
@@ -47,10 +47,6 @@ public sealed class EnemySpawner : MonoBehaviour
 
                 _pool.AddObject(enemy);
             }
-
-        _counter.Init();
-
-        if (_events == null) _events = Events.GetInstance;
     }
 
     void FixedUpdate()
@@ -64,12 +60,22 @@ public sealed class EnemySpawner : MonoBehaviour
         }
     }
 
-    [ContextMenu("Spawn enemy")]
-    public void ChangeSpawning()
+    [ContextMenu("Enable spawning")]
+    public void EnableSpawning()
     {
-        _isSpawning = !_isSpawning;
+        if (_isSpawning) StopAllCoroutines();
 
-        if (_isSpawning) Spawn();
+        _isSpawning = true;
+
+        Spawn();
+    }
+
+    [ContextMenu("Disable spawning")]
+    public void DisableSpawning() 
+    {
+        _isSpawning = false;
+
+        StopAllCoroutines();
     }
 
     void Spawn()
@@ -78,26 +84,28 @@ public sealed class EnemySpawner : MonoBehaviour
 
         if (enemy == null)
         {
-            _counter.UpdateMonsterCounter(_pool.PulledObjects.Count);
             _events.OnGameOver?.Invoke();
             return;
         }
             
         enemy.transform.position = GetRandomPosition();
-        enemy.Init(1f);
+        enemy.Init(PlayerController.DifficultyMultiplier);
         enemy.SetTargetPosition(GetRandomPosition());
 
-        _counter.UpdateMonsterCounter(_pool.PulledObjects.Count);
+        _events.OnEnemySpawned?.Invoke(enemy);
 
-        WaitSpawn();
+        StartCoroutine(WaitSpawn());
     }
 
-    async void WaitSpawn()
+    IEnumerator WaitSpawn()
     {
-        await Task.Delay((int)(Random.Range(_spawningTime - _spawningSpreadingTime, _spawningTime + _spawningSpreadingTime) *
-            1000 - _difficultyTimeReduce));
+        yield return new WaitForSeconds(Random.Range
+            (
+                _spawningTime - _spawningSpreadingTime,
+                _spawningTime + _spawningSpreadingTime
+            ) - _difficultyTimeReduce * (PlayerController.DifficultyMultiplier));
 
-        if (_isSpawning) Spawn();
+        if (IsSpawning) Spawn();
     }
 
     Vector3 GetRandomPosition() => new Vector3

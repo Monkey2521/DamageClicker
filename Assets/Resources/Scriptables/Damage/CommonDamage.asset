@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isDebug: 0
   _name: Just damage
-  _instantDamageValue: 15
+  _instantDamageValue: 35
