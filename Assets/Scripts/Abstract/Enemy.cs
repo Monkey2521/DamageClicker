@@ -9,14 +9,13 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable
     [SerializeField] protected string _name;
     [SerializeField] protected EnemyStats _stats;
     [SerializeField] protected Rigidbody _rigidbody;
+    [SerializeField] protected Health _health;
 
     public string Name => _name;
     public float HP => _stats.HP;
     public float MaxHP => _stats.MaxHP;
     public float Speed => _stats.Speed;
     public int ScoreReward => _stats.ScoreReward;
-
-    public ObjectPool Pool { get; set; }
 
     protected Vector3 _targetPosition;
     public bool OnTarget 
@@ -28,11 +27,13 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable
         }
     }
 
+    public ObjectPool Pool { get; set; }
     protected Events _events;
 
     public virtual void Init(float difficultyMultiplier)
     {
         _stats.Init(difficultyMultiplier);
+        _health.Init(MaxHP);
 
         if (_events == null) _events = Events.GetInstance;
     }
@@ -55,6 +56,8 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable
     public void TakeDamage(Damage damage)
     {
         _stats.HP -= damage.InstantDamageValue;
+
+        _health.UpdateHealth(HP);
 
         if (HP <= 0)
         {
