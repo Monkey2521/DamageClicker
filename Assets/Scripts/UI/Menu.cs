@@ -4,7 +4,7 @@ using UnityEngine;
 public class Menu : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] GameObject _records;
+    [SerializeField] Records _records;
     [SerializeField] GameObject _settings;
     [SerializeField] GameObject _credits;
 
@@ -19,7 +19,7 @@ public class Menu : MonoBehaviour
         LoadScene(GAME_SCENE);
     }
 
-    public void OpenMenu()
+    public void OpenMainMenu()
     {
         LoadScene(MAIN_MENU_SCENE);
     }
