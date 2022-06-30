@@ -17,32 +17,50 @@ public static class EventBus
 
             _subscribers[type].Add(subscriber);
         }
+    }
 
-        /*foreach(Type type in _subscribers.Keys)
+    public static void Unsubscribe(ISubscriber subscriber)
+    {
+        List<Type> interfaces = GetSubscriberInterfaces(subscriber.GetType());
+
+        foreach (Type type in interfaces)
         {
-            Debug.Log(type + ":");
-            foreach (ISubscriber sub in _subscribers[type])
-                Debug.Log("-> " + sub.GetType());
-        }*/
+            if (!_subscribers.ContainsKey(type))
+            {
+                Debug.Log(subscriber.GetType() + " not subscriber of " + type);
+                continue;
+            }
+
+            _subscribers[type].Remove(subscriber);
+        }
     }
 
     static List<Type> GetSubscriberInterfaces(Type subscriberType)
     {
         List<Type> interfaces = new List<Type>();
 
-        foreach (Type type in subscriberType.GetInterfaces())
+        foreach (Type type in subscriberType.GetInterfaces()) 
         {
             if (typeof(ISubscriber).IsAssignableFrom(type) && type != typeof(ISubscriber))
-                interfaces.Add(type);
+                interfaces.Add(type); // получение интерфейсов, наследуемых от ISubscriber
         }
-
-        //foreach (Type type in interfaces) Debug.Log(type);
 
         return interfaces;
     }
 
-    static void Invoke<TSubscriber>(Action<TSubscriber> action) where TSubscriber : ISubscriber
+    public static void Publish<TSubscriber>(Action<TSubscriber> action) where TSubscriber : ISubscriber
     {
+        Type type = typeof(TSubscriber);
 
+        if (!_subscribers.ContainsKey(type))
+        {
+            Debug.Log("Missing key! " + type);
+            return;
+        }
+
+        foreach (ISubscriber subscriber in _subscribers[type])
+        {
+            action.Invoke((TSubscriber)subscriber);
+        }
     }
 }

@@ -19,11 +19,11 @@ public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKi
     [SerializeField] GameObject _boostersMenu;
     [SerializeField] Menu _pauseMenu;
     [SerializeField] Menu _gameOverMenu;
+    [SerializeField] Enemy enemy;
 
     void Start()
     {
         EventBus.Subscribe(this);
-        //_events.OnEnemyKilled.AddListener(UpdateDifficulty);
     }
 
     public void Restart()
@@ -35,24 +35,19 @@ public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKi
     {
         _difficultyMultiplier = 1f;
 
-        //_events.OnGameStart?.Invoke();
+        EventBus.Publish<IGameStartHandler>(handler => handler.OnGameStart());
 
         _startGameButton.SetActive(false);
     }
 
-    public void OnEnemyKilled(Enemy enemy)
-    {
-        UpdateDifficulty(enemy);
-    }
-
-    void UpdateDifficulty(Enemy enemy)
+    public void OnEnemyKilled(Enemy enemy) // увеличение сложности
     {
         _difficultyMultiplier += _difficultyUpgradePerMonster;
     }
 
     public void OnGameOver()
     {
-
+        Debug.Log("GameOver");
     }
 
 }

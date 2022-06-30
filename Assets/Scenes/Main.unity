@@ -171,7 +171,8 @@ MonoBehaviour:
   _isDebug: 0
   _groundPrefab: {fileID: 2080448310883509931, guid: eb9cfe41a75fabc4e8ed32af0aa7adda, type: 3}
   _wallPrefab: {fileID: 5369003481732437895, guid: e14ea2d32911d2a4b9bafd64ca88b36c, type: 3}
-  _groundBoxSize: 5
+  _groundBoxSize: 7
+  _deltaGroundSpawnTime: 0.25
   _groundParent: {fileID: 907191151}
 --- !u!1 &42560261
 GameObject:
@@ -188,7 +189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &42560262
 Transform:
   m_ObjectHideFlags: 0
@@ -2506,6 +2507,7 @@ MonoBehaviour:
   _boostersMenu: {fileID: 1751950508}
   _pauseMenu: {fileID: 2145446735}
   _gameOverMenu: {fileID: 295127583}
+  enemy: {fileID: 0}
 --- !u!1 &1713629250
 GameObject:
   m_ObjectHideFlags: 0

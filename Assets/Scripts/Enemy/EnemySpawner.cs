@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class EnemySpawner : MonoBehaviour
+public sealed class EnemySpawner : MonoBehaviour, IGameStartHandler, IGameOverHandler
 {
     [Header("Debug settings")]
     [SerializeField] bool _isDebug;
@@ -27,7 +27,7 @@ public sealed class EnemySpawner : MonoBehaviour
     {
         Init();
 
-        //_events.OnGameStart.AddListener(EnableSpawning);
+        EventBus.Subscribe(this);
     }
 
     void Init()
@@ -58,7 +58,22 @@ public sealed class EnemySpawner : MonoBehaviour
         }
     }
 
-    [ContextMenu("Enable spawning")]
+    public void OnGameStart()
+    {
+        if (_isDebug) Debug.Log(name + " start game");
+
+        EnableSpawning();
+    }
+
+    public void OnGameOver()
+    {
+        if (_isDebug) Debug.Log(name + " game over");
+
+        DisableSpawning();
+
+        _pool.ReturnAllToPool();
+    }
+
     public void EnableSpawning()
     {
         if (_isSpawning) StopAllCoroutines();
@@ -68,7 +83,6 @@ public sealed class EnemySpawner : MonoBehaviour
         Spawn();
     }
 
-    [ContextMenu("Disable spawning")]
     public void DisableSpawning() 
     {
         _isSpawning = false;
@@ -82,7 +96,7 @@ public sealed class EnemySpawner : MonoBehaviour
 
         if (enemy == null)
         {
-            //_events.OnGameOver?.Invoke();
+            EventBus.Publish<IGameOverHandler>(handler => handler.OnGameOver());
             return;
         }
             
@@ -90,7 +104,7 @@ public sealed class EnemySpawner : MonoBehaviour
         enemy.Init(PlayerController.DifficultyMultiplier);
         enemy.SetTargetPosition(GetRandomPosition());
 
-        //_events.OnEnemySpawned?.Invoke(enemy);
+        EventBus.Publish<IEnemySpawnedHandler>(handler => handler.OnEnemySpawned(enemy));
 
         StartCoroutine(WaitSpawn());
     }

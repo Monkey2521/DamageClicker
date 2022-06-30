@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MonsterCounter : MonoBehaviour
+public class MonsterCounter : MonoBehaviour, IGameStartHandler, IEnemyKilledHandler, IEnemySpawnedHandler
 {
     [Header("Settings")]
     [SerializeField] Text _currentMonsterCount;
@@ -15,14 +15,10 @@ public class MonsterCounter : MonoBehaviour
 
     void Start()
     {
-        Init();
-
-        //_events.OnGameStart.AddListener(Init);
-        //_events.OnEnemyKilled.AddListener(OnKilledUpdate);
-        //_events.OnEnemySpawned.AddListener(OnSpawnedUpdate);
+        EventBus.Subscribe(this);
     }
 
-    public void Init()
+    public void OnGameStart()
     {
         _monsterCount = 0;
 
@@ -37,8 +33,21 @@ public class MonsterCounter : MonoBehaviour
         _scoreCount.text = "0";
 
         _animator.SetBool("OnDanger", false);
+    }
 
-        
+    public void OnEnemyKilled(Enemy enemy)
+    {
+        _monsterCount--;
+
+        UpdateMonsterCounter();
+        AddScore(enemy.ScoreReward);
+    }
+
+    public void OnEnemySpawned(Enemy enemy)
+    {
+        _monsterCount++;
+
+        UpdateMonsterCounter();
     }
 
     public void UpdateMonsterCounter()
@@ -64,21 +73,6 @@ public class MonsterCounter : MonoBehaviour
         }
 
         _currentMonsterCount.text = _monsterCount.ToString();
-    }
-
-    void OnSpawnedUpdate(Enemy enemy)
-    {
-        _monsterCount++;
-
-        UpdateMonsterCounter();
-    }
-
-    void OnKilledUpdate(Enemy enemy)
-    {
-        _monsterCount--;
-
-        UpdateMonsterCounter();
-        AddScore(enemy.ScoreReward);
     }
 
     void AddScore(int score)
