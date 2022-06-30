@@ -171,7 +171,7 @@ MonoBehaviour:
   _isDebug: 0
   _groundPrefab: {fileID: 2080448310883509931, guid: eb9cfe41a75fabc4e8ed32af0aa7adda, type: 3}
   _wallPrefab: {fileID: 5369003481732437895, guid: e14ea2d32911d2a4b9bafd64ca88b36c, type: 3}
-  _groundBoxSize: 3
+  _groundBoxSize: 25
   _groundParent: {fileID: 907191151}
 --- !u!1 &42560261
 GameObject:

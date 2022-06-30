@@ -9,7 +9,7 @@ public sealed class WorldBuilder : MonoBehaviour
     [Header("Settings")]
     [SerializeField] GameObject _groundPrefab;
     [SerializeField] GameObject _wallPrefab;
-    [SerializeField][Range(1, 50)] int _groundBoxSize;
+    [SerializeField][Range(1, 500)] int _groundBoxSize;
 
     [Space(5)]
     [SerializeField] Transform _groundParent;
@@ -30,7 +30,7 @@ public sealed class WorldBuilder : MonoBehaviour
     }
 
     [ContextMenu("Reset world")]
-    void ResetWorld()
+    async void ResetWorld()
     {
         if (_ground.Count > 0)
         {
@@ -56,7 +56,11 @@ public sealed class WorldBuilder : MonoBehaviour
         if (_isDebug) Debug.Log("Building ground...");
 
         for(int i = 0; i < _groundBoxSize; i++)
-            for (int j = 0; j < _groundBoxSize; j++)
+        {
+            f(i);
+            await System.Threading.Tasks.Task.Delay(250);
+        }
+            /*for (int j = 0; j < _groundBoxSize; j++)
             {
                 Vector3 position = new Vector3
                     (
@@ -98,6 +102,64 @@ public sealed class WorldBuilder : MonoBehaviour
                             -GROUND_BOX_RADIUS
                         ), Quaternion.Euler(0f, 90f, 0f), _groundParent));
                 #endregion
-            }
+
+                await System.Threading.Tasks.Task.Delay(250);   
+            }*/
+    }
+
+    async void f(int i)
+    {
+        for (int j = 0; j < _groundBoxSize; j++)
+        {
+            int posMultiplier = (_groundBoxSize - 1) / 2;
+            Vector3 startPosition = new Vector3
+                (
+                    (_groundBoxSize % 2 == 0 ? -EVEN_GROUND_POSITION : 0) - DELTA_GROUND_POSITION * posMultiplier,
+                    0f,
+                    (_groundBoxSize % 2 == 0 ? EVEN_GROUND_POSITION : 0) + DELTA_GROUND_POSITION * posMultiplier
+                );
+
+            Vector3 position = new Vector3
+                       (
+                           startPosition.x + DELTA_GROUND_POSITION * i,
+                           0f,
+                           startPosition.z - DELTA_GROUND_POSITION * j
+                       );
+
+            _ground.Add(Instantiate(_groundPrefab, position, Quaternion.identity, _groundParent));
+
+            #region Wall placing
+            if (i == 0)
+                _walls.Add(Instantiate(_wallPrefab, position + new Vector3
+                    (
+                        -GROUND_BOX_RADIUS,
+                        WALL_Y_POSITION,
+                        0f
+                    ), Quaternion.identity, _groundParent));
+            if (i == _groundBoxSize - 1)
+                _walls.Add(Instantiate(_wallPrefab, position + new Vector3
+                    (
+                        GROUND_BOX_RADIUS,
+                        WALL_Y_POSITION,
+                        0f
+                    ), Quaternion.identity, _groundParent));
+
+            if (j == 0)
+                _walls.Add(Instantiate(_wallPrefab, position + new Vector3
+                    (
+                        0f,
+                        WALL_Y_POSITION,
+                        GROUND_BOX_RADIUS
+                    ), Quaternion.Euler(0f, 90f, 0f), _groundParent));
+            if (j == _groundBoxSize - 1)
+                _walls.Add(Instantiate(_wallPrefab, position + new Vector3
+                    (
+                        0f,
+                        WALL_Y_POSITION,
+                        -GROUND_BOX_RADIUS
+                    ), Quaternion.Euler(0f, 90f, 0f), _groundParent));
+            #endregion
+            await System.Threading.Tasks.Task.Delay(250);
+        }
     }
 }
