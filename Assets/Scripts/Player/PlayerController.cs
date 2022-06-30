@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class PlayerController : MonoBehaviour
+public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKilledHandler, ISubscriber
 {
     [Header("Debug settings")]
     [SerializeField] bool _isDebug;
@@ -22,6 +22,7 @@ public sealed class PlayerController : MonoBehaviour
 
     void Start()
     {
+        EventBus.Subscribe(this);
         //_events.OnEnemyKilled.AddListener(UpdateDifficulty);
     }
 
@@ -39,8 +40,19 @@ public sealed class PlayerController : MonoBehaviour
         _startGameButton.SetActive(false);
     }
 
+    public void OnEnemyKilled(Enemy enemy)
+    {
+        UpdateDifficulty(enemy);
+    }
+
     void UpdateDifficulty(Enemy enemy)
     {
         _difficultyMultiplier += _difficultyUpgradePerMonster;
     }
+
+    public void OnGameOver()
+    {
+
+    }
+
 }
