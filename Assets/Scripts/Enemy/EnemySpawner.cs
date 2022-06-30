@@ -19,7 +19,6 @@ public sealed class EnemySpawner : MonoBehaviour
     [SerializeField] Transform _enemiesParent;
 
     ObjectPool _pool;
-    Events _events;
 
     bool _isSpawning;
     public bool IsSpawning => _isSpawning;
@@ -28,8 +27,7 @@ public sealed class EnemySpawner : MonoBehaviour
     {
         Init();
 
-        _events = Events.GetInstance;
-        _events.OnGameStart.AddListener(EnableSpawning);
+        //_events.OnGameStart.AddListener(EnableSpawning);
     }
 
     void Init()
@@ -84,7 +82,7 @@ public sealed class EnemySpawner : MonoBehaviour
 
         if (enemy == null)
         {
-            _events.OnGameOver?.Invoke();
+            //_events.OnGameOver?.Invoke();
             return;
         }
             
@@ -92,7 +90,7 @@ public sealed class EnemySpawner : MonoBehaviour
         enemy.Init(PlayerController.DifficultyMultiplier);
         enemy.SetTargetPosition(GetRandomPosition());
 
-        _events.OnEnemySpawned?.Invoke(enemy);
+        //_events.OnEnemySpawned?.Invoke(enemy);
 
         StartCoroutine(WaitSpawn());
     }

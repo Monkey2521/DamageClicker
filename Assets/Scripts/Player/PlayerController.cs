@@ -20,13 +20,9 @@ public sealed class PlayerController : MonoBehaviour
     [SerializeField] Menu _pauseMenu;
     [SerializeField] Menu _gameOverMenu;
 
-    Events _events;
-
     void Start()
     {
-        _events = Events.GetInstance;
-
-        _events.OnEnemyKilled.AddListener(UpdateDifficulty);
+        //_events.OnEnemyKilled.AddListener(UpdateDifficulty);
     }
 
     public void Restart()
@@ -38,7 +34,7 @@ public sealed class PlayerController : MonoBehaviour
     {
         _difficultyMultiplier = 1f;
 
-        _events.OnGameStart?.Invoke();
+        //_events.OnGameStart?.Invoke();
 
         _startGameButton.SetActive(false);
     }

@@ -11,19 +11,15 @@ public class MonsterCounter : MonoBehaviour
 
     [SerializeField] Text _scoreCount;
     int _score;
-    public int TotalScore { get; private set; }
-
-    Events _events;
+    public int TotalScore { get; private set; } 
 
     void Start()
     {
         Init();
 
-        _events = Events.GetInstance;
-
-        _events.OnGameStart.AddListener(Init);
-        _events.OnEnemyKilled.AddListener(OnKilledUpdate);
-        _events.OnEnemySpawned.AddListener(OnSpawnedUpdate);
+        //_events.OnGameStart.AddListener(Init);
+        //_events.OnEnemyKilled.AddListener(OnKilledUpdate);
+        //_events.OnEnemySpawned.AddListener(OnSpawnedUpdate);
     }
 
     public void Init()

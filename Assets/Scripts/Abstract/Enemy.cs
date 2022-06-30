@@ -28,14 +28,11 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable
     }
 
     public ObjectPool Pool { get; set; }
-    protected Events _events;
 
     public virtual void Init(float difficultyMultiplier)
     {
         _stats.Init(difficultyMultiplier);
         _health.Init(MaxHP);
-
-        if (_events == null) _events = Events.GetInstance;
     }
 
     public virtual void Move()
@@ -53,15 +50,15 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable
         _targetPosition = position;
     }
 
-    public void TakeDamage(Damage damage)
+    public void TakeDamage(float damage)
     {
-        _stats.HP -= damage.InstantDamageValue;
+        _stats.HP -= damage;
 
         _health.UpdateHealth(HP);
 
         if (HP <= 0)
         {
-            _events.OnEnemyKilled?.Invoke(this);
+            //_events.OnEnemyKilled?.Invoke(this);
             ReturnToPool();
         }
     }

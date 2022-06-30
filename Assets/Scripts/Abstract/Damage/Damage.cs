@@ -29,7 +29,7 @@ public abstract class Damage : ScriptableObject
 
     public void MakeDamage(IDamageable target)
     { 
-        target.TakeDamage(this);
+        target.TakeDamage(_instantDamageValue);
         MakeDamageEffect(target);
 
         if (_additionalDamage != null)
