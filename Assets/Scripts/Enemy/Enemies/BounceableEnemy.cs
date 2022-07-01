@@ -28,8 +28,6 @@ public sealed class BounceableEnemy : Enemy
 
     void OnCollisionEnter(Collision collision)
     {
-        if (_isDebug) Debug.Log(_name + " on collision with " + collision.collider.name);
-        
         if (collision.collider.tag == Tags.Ground)
             _onGround = true;
 

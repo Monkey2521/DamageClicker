@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKilledHandler, ISubscriber
+public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKilledHandler, IEnemyClickedHandler
 {
     [Header("Debug settings")]
     [SerializeField] bool _isDebug;
@@ -19,7 +19,6 @@ public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKi
     [SerializeField] GameObject _boostersMenu;
     [SerializeField] Menu _pauseMenu;
     [SerializeField] Menu _gameOverMenu;
-    [SerializeField] Enemy enemy;
 
     void Start()
     {
@@ -28,7 +27,11 @@ public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKi
 
     public void Restart()
     {
-
+        _startGameButton.gameObject.SetActive(true);
+        _pauseMenu.gameObject.SetActive(false);
+        _boostersMenu.gameObject.SetActive(false);
+        _shopMenu.gameObject.SetActive(false);
+        _gameOverMenu.gameObject.SetActive(false);
     }
 
     public void StartGame()
@@ -45,9 +48,19 @@ public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKi
         _difficultyMultiplier += _difficultyUpgradePerMonster;
     }
 
+    public void OnEnemyClicked(Enemy enemy)
+    {
+        Debug.Log(enemy);
+    }
+
     public void OnGameOver()
     {
         Debug.Log("GameOver");
+        _pauseMenu.gameObject.SetActive(false);
+        _boostersMenu.gameObject.SetActive(false);
+        _shopMenu.gameObject.SetActive(false);
+        _startGameButton.gameObject.SetActive(false);
+        _gameOverMenu.gameObject.SetActive(true);
     }
 
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable
+public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable, IPointerClickHandler
 {
     [Header("Debug settings")]
     [SerializeField] protected bool _isDebug;
@@ -76,4 +77,11 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable
     }
 
     public Transform GetTransform() => transform;
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (_isDebug) Debug.Log("Click on " + Name);
+
+        EventBus.Publish<IEnemyClickedHandler>(handler => handler.OnEnemyClicked(this));
+    }
 }
