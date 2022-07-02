@@ -10,7 +10,7 @@ public sealed class Record : MonoBehaviour
 
     public void Init(BestScore bestScore)
     {
-
+        _positionText.text = bestScore.Position.ToString();
         _timeText.text = bestScore.Time.GetTime();
         _scoreText.text = bestScore.Score.ToString();
     }

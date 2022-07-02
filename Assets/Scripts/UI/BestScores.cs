@@ -6,16 +6,18 @@ public class BestScores : ScriptableObject
 {
     private List<BestScore> _bestScores = new List<BestScore>();
     public List<BestScore> Scores => _bestScores;
+    public bool IsEmpty => _bestScores.Count == 0;
 
     readonly int MAX_SCORES = 3;
 
-    public void CheckScore(float time, int score)
+    public bool CheckScore(float time, int score)
     {
         BestScore newScore = new BestScore(time, score);
 
         if (_bestScores.Count < 3)
         {
             _bestScores.Add(newScore);
+            return true;
         }
         else
         {
@@ -26,15 +28,22 @@ public class BestScores : ScriptableObject
                     _bestScores.Insert(i, newScore);
                     _bestScores.Remove(_bestScores[MAX_SCORES]);
 
-                    break;
+                    return true;
                 }
             }
+            return false;
         }
+    }
+
+    private void SortScores()
+    {
+
     }
 }
 
 public struct BestScore
 {
+    public int Position;
     public GameTime Time;
     public int Score;
 
@@ -42,6 +51,7 @@ public struct BestScore
     {
         Time = new GameTime(time);
         Score = score;
+        Position = 0;
     }
 }
 

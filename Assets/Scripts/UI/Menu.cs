@@ -5,6 +5,7 @@ public sealed class Menu : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private Records _records;
     [SerializeField] private GameObject _credits;
+    [SerializeField] private NewRecord _newRecord;
 
     #region Scenes indexes
     private readonly static int MAIN_MENU_SCENE = 0;
@@ -24,7 +25,20 @@ public sealed class Menu : MonoBehaviour
 
     public void OpenRecords()
     {
+        _records.gameObject.SetActive(true);
+        _records.Init();
+    }
 
+    public void CheckRecords(float time, int score)
+    {
+        if (_newRecord.CheckRecord(time, score))
+        {
+            _newRecord.gameObject.SetActive(true);
+        }
+        else
+        {
+            _newRecord.gameObject.SetActive(false);
+        }
     }
 
     public void OpenCredits()

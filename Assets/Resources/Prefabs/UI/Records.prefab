@@ -247,6 +247,8 @@ MonoBehaviour:
   _isDebug: 0
   _bestScores: {fileID: 11400000, guid: 1044cf3a182996e489c7dd60a6ea4cc4, type: 2}
   _recordPrefab: {fileID: -8332596854199853398, guid: 74239faced403d14dba6b1e96107a8fa, type: 3}
+  _recordsParent: {fileID: 8654917076964813191}
+  _noGamesPanel: {fileID: 744620801760999864}
 --- !u!1 &3627072745404060755
 GameObject:
   m_ObjectHideFlags: 0
