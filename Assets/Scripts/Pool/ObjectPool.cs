@@ -3,10 +3,10 @@ using UnityEngine;
 
 public sealed class ObjectPool
 {
-    bool _isDebug;
+    private bool _isDebug;
 
-    List<IPoolable> _pool;
-    List<IPoolable> _pulledObjects;
+    private List<IPoolable> _pool;
+    private List<IPoolable> _pulledObjects;
     public List<IPoolable> PulledObjects => _pulledObjects;
 
     public bool IsEmpty => _pool.Count == 0;

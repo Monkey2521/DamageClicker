@@ -5,35 +5,35 @@ using UnityEngine;
 public sealed class WorldBuilder : MonoBehaviour
 {
     [Header("Debug settings")]
-    [SerializeField] bool _isDebug;
+    [SerializeField] private bool _isDebug;
 
     [Header("Settings")]
-    [SerializeField] GameObject _groundPrefab;
-    [SerializeField] GameObject _wallPrefab;
-    [SerializeField][Range(2, 10)] int _groundBoxSize;
+    [SerializeField] private GameObject _groundPrefab;
+    [SerializeField] private GameObject _wallPrefab;
+    [SerializeField][Range(2, 10)] private int _groundBoxSize;
 
     [Tooltip("Coroutine wait time")]
-    [SerializeField][Range(0.01f, 1f)] float _deltaGroundSpawnTime; 
+    [SerializeField][Range(0.01f, 1f)] private float _deltaGroundSpawnTime; 
 
     [Space(5)]
-    [SerializeField] Transform _groundParent;
+    [SerializeField] private Transform _groundParent;
 
-    List<GameObject> _ground = new List<GameObject>();
-    List<GameObject> _walls = new List<GameObject>();
+    private List<GameObject> _ground = new List<GameObject>();
+    private List<GameObject> _walls = new List<GameObject>();
 
-    readonly float GROUND_BOX_RADIUS = 5f;
-    readonly float DELTA_GROUND_POSITION = 10f;
-    readonly float EVEN_GROUND_POSITION = 5f;
-    readonly float WALL_Y_POSITION = 1.5f;
+    private readonly float GROUND_BOX_RADIUS = 5f;
+    private readonly float DELTA_GROUND_POSITION = 10f;
+    private readonly float EVEN_GROUND_POSITION = 5f;
+    private readonly float WALL_Y_POSITION = 1.5f;
 
     public static float MAX_SPAWN_POSITION { get; private set; }
 
-    void Awake()
+    private void Awake()
     {
         StartCoroutine(ResetWorld());
     }
 
-    IEnumerator ResetWorld()
+    private IEnumerator ResetWorld()
     {
         if (_ground.Count > 0)
         {
@@ -66,7 +66,7 @@ public sealed class WorldBuilder : MonoBehaviour
         }
     }
 
-    IEnumerator PlaceLine(int index, Vector3 startPosition) // 
+    private IEnumerator PlaceLine(int index, Vector3 startPosition) // 
     {
         for (int j = 0; j < _groundBoxSize; j++)
         {
@@ -101,7 +101,7 @@ public sealed class WorldBuilder : MonoBehaviour
         }
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         StopAllCoroutines();    
     }

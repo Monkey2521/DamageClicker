@@ -4,18 +4,18 @@ using UnityEngine;
 public sealed class CameraMoveController : MonoBehaviour
 {
     [Header("Debug settings")]
-    [SerializeField] bool _isDebug;
+    [SerializeField] private bool _isDebug;
 
     [Header("Settings")]
-    [SerializeField] float _slideSpeed;
-    Touch _touch;
+    [SerializeField] private float _slideSpeed;
+    private Touch _touch;
 
-    void Awake()
+    private void Awake()
     {
 
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (Input.touchCount > 0)
         {

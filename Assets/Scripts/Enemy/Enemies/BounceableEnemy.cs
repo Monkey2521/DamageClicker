@@ -3,11 +3,11 @@ using UnityEngine;
 public sealed class BounceableEnemy : Enemy
 {
     [Header("Bounce settings")]
-    [SerializeField] Animator _animator;
-    [SerializeField] float _bounceForce;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private float _bounceForce;
 
-    bool _onGround;
-    bool _onCompression;
+    private bool _onGround;
+    private bool _onCompression;
 
     public override void Init(float difficultyMultiplier)
     {
@@ -26,7 +26,7 @@ public sealed class BounceableEnemy : Enemy
             _rigidbody.AddForce(Vector3.up * _bounceForce, ForceMode.Impulse);
     }
 
-    void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.tag == Tags.Ground)
             _onGround = true;
@@ -38,7 +38,7 @@ public sealed class BounceableEnemy : Enemy
         }
     }
 
-    void OnCollisionExit(Collision collision)
+    private void OnCollisionExit(Collision collision)
     {
         if (collision.collider.tag == Tags.Ground) _onGround = false;
     }

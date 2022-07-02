@@ -4,23 +4,24 @@ using UnityEngine;
 public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKilledHandler, IEnemyClickedHandler
 {
     [Header("Debug settings")]
-    [SerializeField] bool _isDebug;
+    [SerializeField] private bool _isDebug;
 
     [Header("Settings")]
-    [SerializeField][Range(0.01f, 0.2f)] float _difficultyUpgradePerMonster;
-    [SerializeField] Damage _damage;
+    [SerializeField][Range(0.01f, 0.2f)] private float _difficultyUpgradePerMonster;
+    [SerializeField] private Damage _damage;
 
-    static float _difficultyMultiplier;
+    private static float _difficultyMultiplier;
     public static float DifficultyMultiplier => _difficultyMultiplier;
 
     [Header("UI settings")]
-    [SerializeField] GameObject _startGameButton;
-    [SerializeField] Shop _shopMenu;
-    [SerializeField] GameObject _boostersMenu;
-    [SerializeField] Menu _pauseMenu;
-    [SerializeField] Menu _gameOverMenu;
+    [SerializeField] private GameObject _startGameButton;
+    [SerializeField] private GameObject _monsterCounter;
+    [SerializeField] private Menu _pauseMenu;
+    [SerializeField] private Menu _gameOverMenu;
+    [SerializeField] private Shop _shopMenu;
+    [SerializeField] private GameObject _boostersMenu;
 
-    void Start()
+    private void Start()
     {
         EventBus.Subscribe(this);
     }
@@ -28,6 +29,7 @@ public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKi
     public void Restart()
     {
         _startGameButton.gameObject.SetActive(true);
+        _monsterCounter.SetActive(false);
         _pauseMenu.gameObject.SetActive(false);
         _boostersMenu.gameObject.SetActive(false);
         _shopMenu.gameObject.SetActive(false);
@@ -38,9 +40,10 @@ public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKi
     {
         _difficultyMultiplier = 1f;
 
-        EventBus.Publish<IGameStartHandler>(handler => handler.OnGameStart());
-
+        _monsterCounter.SetActive(true);
         _startGameButton.SetActive(false);
+
+        EventBus.Publish<IGameStartHandler>(handler => handler.OnGameStart());
     }
 
     public void OnEnemyKilled(Enemy enemy) // увеличение сложности
@@ -50,12 +53,15 @@ public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKi
 
     public void OnEnemyClicked(Enemy enemy)
     {
-        Debug.Log(enemy);
+        if (_isDebug) Debug.Log(enemy);
+
+        _damage.MakeDamage(enemy);
     }
 
     public void OnGameOver()
     {
-        Debug.Log("GameOver");
+        if (_isDebug) Debug.Log("GameOver");
+
         _pauseMenu.gameObject.SetActive(false);
         _boostersMenu.gameObject.SetActive(false);
         _shopMenu.gameObject.SetActive(false);

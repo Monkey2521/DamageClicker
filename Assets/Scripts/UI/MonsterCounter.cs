@@ -1,21 +1,22 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MonsterCounter : MonoBehaviour, IGameStartHandler, IEnemyKilledHandler, IEnemySpawnedHandler
+public sealed class MonsterCounter : MonoBehaviour, IGameStartHandler, IEnemyKilledHandler, IEnemySpawnedHandler
 {
     [Header("Settings")]
-    [SerializeField] Text _currentMonsterCount;
-    [SerializeField] Text _maxMonsterCount;
-    [SerializeField] Animator _animator;
-    int _monsterCount;
+    [SerializeField] private Text _currentMonsterCount;
+    [SerializeField] private Text _maxMonsterCount;
+    [SerializeField] private Animator _animator;
+    private int _monsterCount;
 
-    [SerializeField] Text _scoreCount;
-    int _score;
-    public int TotalScore { get; private set; } 
+    [SerializeField] private Text _scoreCount;
+    private int _score;
+    public int TotalScore { get; private set; }
 
-    void Start()
+    private void Start()
     {
         EventBus.Subscribe(this);
+        gameObject.SetActive(false);
     }
 
     public void OnGameStart()
@@ -75,7 +76,7 @@ public class MonsterCounter : MonoBehaviour, IGameStartHandler, IEnemyKilledHand
         _currentMonsterCount.text = _monsterCount.ToString();
     }
 
-    void AddScore(int score)
+    private void AddScore(int score)
     {
         _score += score;
         TotalScore += score;

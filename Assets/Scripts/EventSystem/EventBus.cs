@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class EventBus
 {
-    static Dictionary<Type, List<ISubscriber>> _subscribers = new Dictionary<Type, List<ISubscriber>>();
+    private static Dictionary<Type, List<ISubscriber>> _subscribers = new Dictionary<Type, List<ISubscriber>>();
 
     public static void Subscribe(ISubscriber subscriber)
     {
@@ -35,7 +35,7 @@ public static class EventBus
         }
     }
 
-    static List<Type> GetSubscriberInterfaces(Type subscriberType)
+    private static List<Type> GetSubscriberInterfaces(Type subscriberType)
     {
         List<Type> interfaces = new List<Type>();
 

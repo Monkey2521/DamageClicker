@@ -1,16 +1,14 @@
 using UnityEngine;
 
-
-public class Menu : MonoBehaviour
+public sealed class Menu : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] Records _records;
-    [SerializeField] GameObject _settings;
-    [SerializeField] GameObject _credits;
+    [SerializeField] private Records _records;
+    [SerializeField] private GameObject _credits;
 
     #region Scenes indexes
-    readonly static int MAIN_MENU_SCENE = 0;
-    readonly static int GAME_SCENE = 1;
+    private readonly static int MAIN_MENU_SCENE = 0;
+    private readonly static int GAME_SCENE = 1;
     #endregion
 
     #region Button functions
@@ -29,11 +27,6 @@ public class Menu : MonoBehaviour
 
     }
 
-    public void OpenSettings()
-    {
-
-    }
-
     public void OpenCredits()
     {
 
@@ -45,7 +38,7 @@ public class Menu : MonoBehaviour
     }
     #endregion
 
-    void LoadScene(int index)
+    private void LoadScene(int index)
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(index);
     }

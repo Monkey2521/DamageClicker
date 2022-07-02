@@ -5,32 +5,31 @@ using UnityEngine;
 public sealed class EnemySpawner : MonoBehaviour, IGameStartHandler, IGameOverHandler
 {
     [Header("Debug settings")]
-    [SerializeField] bool _isDebug;
+    [SerializeField] private bool _isDebug;
 
     [Header("Settings")]
-    [SerializeField][Range(0.1f, 10f)] float _spawningTime;
-    [SerializeField][Range(0f, 1f)] float _spawningSpreadingTime;
-    [SerializeField][Range(0.01f, 0.1f)] float _difficultyTimeReduce;
+    [SerializeField][Range(0.1f, 10f)] private float _spawningTime;
+    [SerializeField][Range(0f, 1f)] private float _spawningSpreadingTime;
+    [SerializeField][Range(0.01f, 0.1f)] private float _difficultyTimeReduce;
 
     [Space(5)]
-    [SerializeField] List<EnemyPool> _enemiesPools;
+    [SerializeField] private List<EnemyPool> _enemiesPools;
 
     [Space(5)]
-    [SerializeField] Transform _enemiesParent;
+    [SerializeField] private Transform _enemiesParent;
 
-    ObjectPool _pool;
+    private ObjectPool _pool;
 
-    bool _isSpawning;
-    public bool IsSpawning => _isSpawning;
+    private bool _isSpawning;
 
-    void Start()
+    private void Start()
     {
         Init();
 
         EventBus.Subscribe(this);
     }
 
-    void Init()
+    private void Init()
     {
         if (_pool != null)
             foreach (Enemy enemy in _pool.Reset())
@@ -47,7 +46,7 @@ public sealed class EnemySpawner : MonoBehaviour, IGameStartHandler, IGameOverHa
             }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         foreach(Enemy enemy in _pool.PulledObjects)
         {
@@ -90,7 +89,7 @@ public sealed class EnemySpawner : MonoBehaviour, IGameStartHandler, IGameOverHa
         StopAllCoroutines();
     }
 
-    void Spawn()
+    private void Spawn()
     {
         Enemy enemy = _pool.PullObject() as Enemy;
 
@@ -109,7 +108,7 @@ public sealed class EnemySpawner : MonoBehaviour, IGameStartHandler, IGameOverHa
         StartCoroutine(WaitSpawn());
     }
 
-    IEnumerator WaitSpawn()
+    private IEnumerator WaitSpawn()
     {
         yield return new WaitForSeconds(Random.Range
             (
@@ -117,10 +116,10 @@ public sealed class EnemySpawner : MonoBehaviour, IGameStartHandler, IGameOverHa
                 _spawningTime + _spawningSpreadingTime
             ) - _difficultyTimeReduce * (PlayerController.DifficultyMultiplier));
 
-        if (IsSpawning) Spawn();
+        if (_isSpawning) Spawn();
     }
 
-    Vector3 GetRandomPosition() => new Vector3
+    private Vector3 GetRandomPosition() => new Vector3
         (
             Random.Range(-WorldBuilder.MAX_SPAWN_POSITION, WorldBuilder.MAX_SPAWN_POSITION),
             1f,

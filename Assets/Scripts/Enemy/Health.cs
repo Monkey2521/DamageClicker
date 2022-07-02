@@ -2,13 +2,14 @@ using UnityEngine;
 
 public sealed class Health : MonoBehaviour
 {
-    readonly Vector3 _defaultScale = new Vector3(0.2f, 1f, 0.2f);
+    private readonly Vector3 _defaultScale = new Vector3(0.2f, 1f, 0.2f);
 
-    float _maxHP;
+    private float _maxHP;
 
     public void Init(float maxHP)
     {
         _maxHP = maxHP;
+        UpdateHealth(maxHP);
     }
 
     public void UpdateHealth(float hp)
