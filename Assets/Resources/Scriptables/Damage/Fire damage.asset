@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isDebug: 0
   _name: Fire damage
-  _instantDamageValue: 3
+  _instantDamageValue: 4.5
   _booster: {fileID: 11400000, guid: 2c5afb5df213b0d49b56794adc9b857e, type: 2}
   _deltaTimeForDamage: 0.1
   _fireParticle: {fileID: 7911951538639361497, guid: d8298d54946f0464e9f9be367dea5942, type: 3}

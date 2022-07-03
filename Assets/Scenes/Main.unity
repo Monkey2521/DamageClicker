@@ -1921,8 +1921,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da1410ea16ebf944a7454c49a054197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isDebug: 1
-  _slideSpeed: 0.25
+  _isDebug: 0
+  _slideSpeed: 0.2
   _defaultCameraPos: {x: 0, y: 13.43, z: -13.43}
 --- !u!1 &985712849
 GameObject:

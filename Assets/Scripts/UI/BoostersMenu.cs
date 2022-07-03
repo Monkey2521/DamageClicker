@@ -11,7 +11,7 @@ public sealed class BoostersMenu : MonoBehaviour, IGameStartHandler, IGameOverHa
     private List<BoosterPrefab> _currentBoosters = new List<BoosterPrefab>();
     private bool _onGame;
 
-    private void Start()
+    private void Awake()
     {
         EventBus.Subscribe(this);
 

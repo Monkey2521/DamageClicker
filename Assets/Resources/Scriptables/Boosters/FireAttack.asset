@@ -17,5 +17,5 @@ MonoBehaviour:
   _name: Fire attack
   _cooldown: 15
   _damage: {fileID: 11400000, guid: 9635daee0aa03a740b6b2857c0316199, type: 2}
-  _fireDamagePerSecond: 5
+  _fireDamagePerSecond: 8
   _burningTime: 5

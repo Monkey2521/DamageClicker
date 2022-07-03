@@ -13,7 +13,7 @@ public sealed class MonsterCounter : MonoBehaviour, IGameStartHandler, IEnemyKil
     private int _score;
     public int TotalScore => _score;
 
-    private void Start()
+    private void Awake()
     {
         EventBus.Subscribe(this);
         gameObject.SetActive(false);
