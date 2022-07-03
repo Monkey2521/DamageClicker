@@ -14,11 +14,6 @@ public abstract class Damage : ScriptableObject
     [SerializeField][Range(0.1f, 1000f)] protected float _instantDamageValue;
     public float InstantDamageValue => _instantDamageValue;
 
-    public void Init()
-    {
-
-    }
-
     public void AddDamage(Damage damage)
     {
         if (_additionalDamage == null)

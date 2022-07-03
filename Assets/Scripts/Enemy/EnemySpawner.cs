@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class EnemySpawner : MonoBehaviour, IGameStartHandler, IGameOverHandler
+public sealed class EnemySpawner : MonoBehaviour, IGameStartHandler, IGameOverHandler, ISpawnerFreezeHandler, ISpawnerUnfreezeHandler
 {
     [Header("Debug settings")]
     [SerializeField] private bool _isDebug;
@@ -71,6 +71,16 @@ public sealed class EnemySpawner : MonoBehaviour, IGameStartHandler, IGameOverHa
         DisableSpawning();
 
         _pool.ReturnAllToPool();
+    }
+
+    public void OnFreeze()
+    {
+        DisableSpawning();
+    }
+
+    public void OnUnfreeze()
+    {
+        EnableSpawning();
     }
 
     public void EnableSpawning()

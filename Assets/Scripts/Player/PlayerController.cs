@@ -19,7 +19,7 @@ public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKi
     [SerializeField] private Menu _gameOverMenu;
     [SerializeField] private GameObject _boostersMenu;
     [SerializeField] private Text _timerText;
-    [SerializeField] private Text _gameOverScore; 
+    [SerializeField] private Text _gameOverScore;
 
     private float _timer;
 
@@ -42,7 +42,7 @@ public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKi
         _monsterCounter.gameObject.SetActive(false);
         _boostersMenu.gameObject.SetActive(false);
         _gameOverMenu.gameObject.SetActive(false);
-    }
+    } 
 
     public void StartGame()
     {
@@ -80,6 +80,7 @@ public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKi
         _gameOverMenu.gameObject.SetActive(true);
         _gameOverScore.text = "GAME OVER!\nTotal score: " + _monsterCounter.TotalScore.ToString();
         _gameOverMenu.CheckRecords(_timer, _monsterCounter.TotalScore);
+
         _monsterCounter.gameObject.SetActive(false);
     }
 }

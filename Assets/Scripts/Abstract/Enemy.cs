@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable, IPointerClickHandler
+public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable, IPointerClickHandler, IAreaCleanerHandler
 {
     [Header("Debug settings")]
     [SerializeField] protected bool _isDebug;
@@ -83,5 +83,11 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable, 
         if (_isDebug) Debug.Log("Click on " + Name);
 
         EventBus.Publish<IEnemyClickedHandler>(handler => handler.OnEnemyClicked(this));
+    }
+
+    public void OnAreaCleaned()
+    {
+        EventBus.Publish<IEnemyKilledHandler>(handler => handler.OnEnemyKilled(this));
+        ReturnToPool();
     }
 }
