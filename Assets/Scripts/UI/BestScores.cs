@@ -14,25 +14,15 @@ public class BestScores : ScriptableObject
     {
         BestScore newScore = new BestScore(time, score);
 
-        if (_bestScores.Count < 3)
+        if (_bestScores.Count < MAX_SCORES)
         {
-            if (_bestScores.Count == 0)
-            {
-                _bestScores.Add(newScore);
-            }
-            else
-            {
-                int i = 0;
-                while (_bestScores[i].Time.IsBetter(newScore.Time) && i < 2)
-                    i++;
+            int i = 0;
 
-                _bestScores.Insert(i, newScore);
-            }
+            while (i < _bestScores.Count && _bestScores[i].Time.IsBetter(newScore.Time))
+                i++;
 
-            foreach (BestScore score1 in _bestScores)
-            {
-                Debug.Log(score1.Time.GetTime());
-            }
+            if (i == _bestScores.Count) _bestScores.Add(newScore);
+            else _bestScores.Insert(i, newScore);
 
             SetPositions();
 
@@ -60,7 +50,7 @@ public class BestScores : ScriptableObject
     {
         for(int i = 0; i < _bestScores.Count; i++)
         {
-            _bestScores[i].SetPosition(i + 1);
+            _bestScores[i].Position = i + 1;
         }
     }
 }
@@ -77,12 +67,6 @@ public class BestScore
         Time = new GameTime(time);
         Score = score;
         Position = 0;
-    }
-
-    public void SetPosition(int index)
-    {
-        Position = index;
-        Debug.Log(index + " " + Position);
     }
 }
 

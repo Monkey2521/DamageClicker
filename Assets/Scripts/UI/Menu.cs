@@ -5,7 +5,7 @@ public sealed class Menu : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private Records _records;
     [SerializeField] private GameObject _credits;
-    [SerializeField] private NewRecord _newRecord;
+    [SerializeField] private NewRecord _newRecord; 
 
     #region Scenes indexes
     private readonly static int MAIN_MENU_SCENE = 0;

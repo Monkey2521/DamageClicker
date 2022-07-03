@@ -434,7 +434,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &295127580
 RectTransform:
   m_ObjectHideFlags: 0
@@ -673,7 +673,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'TIME: 22.3 sec'
+  m_Text: 'TIME: '
 --- !u!222 &315451165
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2266,6 +2266,7 @@ MonoBehaviour:
   _gameOverMenu: {fileID: 295127583}
   _boostersMenu: {fileID: 1751950508}
   _timerText: {fileID: 826908475}
+  _gameOverScore: {fileID: 46224428}
 --- !u!1 &1619309123
 GameObject:
   m_ObjectHideFlags: 0
@@ -2336,7 +2337,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'TOTAL SCORE: 249'
+  m_Text: 'TOTAL SCORE: '
 --- !u!222 &1619309126
 CanvasRenderer:
   m_ObjectHideFlags: 0

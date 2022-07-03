@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: BestScores
   m_EditorClassIdentifier: 
   _bestScores:
-  - Position: 0
+  - Position: 1
     Time:
-      _time: 0:28.2
-    Score: 13
-  - Position: 0
+      _time: 0:35.2
+    Score: 29
+  - Position: 2
     Time:
-      _time: 0:23.9
-    Score: 3
-  - Position: 0
+      _time: 0:35.0
+    Score: 26
+  - Position: 3
     Time:
-      _time: 0:22.9
-    Score: 10
+      _time: 0:28.8
+    Score: 20

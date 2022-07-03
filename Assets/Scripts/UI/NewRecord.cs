@@ -7,6 +7,7 @@ public sealed class NewRecord : MonoBehaviour
     [SerializeField] private Text _timeText;
     [SerializeField] private Text _scoreText;
     [SerializeField] private BestScores _bestScores;
+
     public bool CheckRecord(float time, int score)
     {
         if (_bestScores.CheckScore(time, score))
