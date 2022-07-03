@@ -17,3 +17,4 @@ MonoBehaviour:
   _instantDamageValue: 1
   _booster: {fileID: 11400000, guid: bc600c958f5255d4e8948dfb92807a9b, type: 2}
   _deltaTimeForDamage: 0.05
+  _frozenParticle: {fileID: 7835119699819660931, guid: 95c67aa15e8d3384185ddcfca1a7ab86, type: 3}

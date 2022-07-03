@@ -12,16 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c2c1c96965de8d4788473ec03a09758, type: 3}
   m_Name: BestScores
   m_EditorClassIdentifier: 
-  _bestScores:
-  - Position: 1
-    Time:
-      _time: 0:35.2
-    Score: 29
-  - Position: 2
-    Time:
-      _time: 0:35.0
-    Score: 26
-  - Position: 3
-    Time:
-      _time: 0:28.8
-    Score: 20
+  _bestScores: []

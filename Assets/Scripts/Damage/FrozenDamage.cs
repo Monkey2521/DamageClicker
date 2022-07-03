@@ -6,7 +6,7 @@ public sealed class FrozenDamage : Damage
 {
     [SerializeField] private FrozenAttack _booster;
     [SerializeField][Range(0.01f, 1f)] private float _deltaTimeForDamage;
-
+    [SerializeField] private ParticleSystem _frozenParticle;
     protected override void MakeDamageEffect(IDamageable target)
     {
         target.TakeDamage(_instantDamageValue);
@@ -18,6 +18,8 @@ public sealed class FrozenDamage : Damage
     async private void FreezeTarget(IDamageable target)
     {
         Rigidbody rigidbody = target.GetTransform().GetComponent<Rigidbody>();
+        ParticleSystem particle = Instantiate(_frozenParticle, target.GetTransform());
+
         for (int i = 0; i < (int)(_booster.SlowTime / _deltaTimeForDamage); i++)
         {
             if (target.GetTransform().gameObject.activeSelf)
@@ -31,8 +33,10 @@ public sealed class FrozenDamage : Damage
             else
             {
                 if (_isDebug) Debug.Log("End FrozenAttack");
-                return;
+                break;
             }
         }
+
+        Destroy(particle);
     }
 }

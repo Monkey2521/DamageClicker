@@ -21,7 +21,7 @@ public sealed class BoosterPrefab : MonoBehaviour
         _timer = _booster.Cooldown;
     }
 
-    private void Update()
+    public void UpdateTimer()
     {
         if (_timer > 0)
         {

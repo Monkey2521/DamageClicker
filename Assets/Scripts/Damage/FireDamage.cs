@@ -6,7 +6,7 @@ public sealed class FireDamage : Damage
 {
     [SerializeField] private FireAttack _booster;
     [SerializeField][Range(0.01f, 1f)] private float _deltaTimeForDamage;
-
+    [SerializeField] private ParticleSystem _fireParticle;
     protected override void MakeDamageEffect(IDamageable target)
     {
         target.TakeDamage(_instantDamageValue);
@@ -17,6 +17,8 @@ public sealed class FireDamage : Damage
 
     async private void BurnTarget(IDamageable target)
     {
+        ParticleSystem particle = Instantiate(_fireParticle, target.GetTransform());
+
         for (int i = 0; i < (int)(_booster.BurningTime / _deltaTimeForDamage); i++)
         {
             if (target.GetTransform().gameObject.activeSelf)
@@ -27,8 +29,10 @@ public sealed class FireDamage : Damage
             else
             {
                 if (_isDebug) Debug.Log("End FireAttack");
-                return;
+                break;
             }
         }
+
+        Destroy(particle);
     }
 }
