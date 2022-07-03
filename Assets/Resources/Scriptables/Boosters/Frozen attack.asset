@@ -17,5 +17,5 @@ MonoBehaviour:
   _name: Frozen attack
   _cooldown: 10
   _damage: {fileID: 11400000, guid: 33fdeffec12897f4b990be2191e3e50f, type: 2}
-  _speedSlowMultiplier: 0.5
+  _speedSlowMultiplier: 0.35
   _slowTime: 2

@@ -30,7 +30,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable, 
 
     public ObjectPool Pool { get; set; }
 
-    public float SpeedMultiplier = 1f;
+    [HideInInspector] public float SpeedMultiplier = 1f;
 
     private void Start()
     {

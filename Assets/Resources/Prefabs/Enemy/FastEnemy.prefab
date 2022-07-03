@@ -138,6 +138,7 @@ MonoBehaviour:
     _scoreReward: 3
   _rigidbody: {fileID: -1781702358038193946}
   _health: {fileID: 1284169999222387285}
+  SpeedMultiplier: 1
 --- !u!1001 &3633870102206387097
 PrefabInstance:
   m_ObjectHideFlags: 0

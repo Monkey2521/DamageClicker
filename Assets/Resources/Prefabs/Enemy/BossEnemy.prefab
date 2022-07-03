@@ -157,8 +157,9 @@ MonoBehaviour:
     _scoreReward: 15
   _rigidbody: {fileID: 5941397154989188636}
   _health: {fileID: 4460402794697676157}
+  SpeedMultiplier: 1
   _animator: {fileID: 2953594462650380835}
-  _bounceForce: 25
+  _bounceForce: 30
 --- !u!1001 &2187299025729680561
 PrefabInstance:
   m_ObjectHideFlags: 0

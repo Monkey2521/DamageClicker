@@ -7,20 +7,93 @@ public sealed class CameraMoveController : MonoBehaviour
     [SerializeField] private bool _isDebug;
 
     [Header("Settings")]
-    [SerializeField] private float _slideSpeed;
-    private Touch _touch;
+    [SerializeField][Range(0.1f, 10f)] private float _slideSpeed;
+    [SerializeField] private Vector3 _defaultCameraPos;
+
+    private Vector2 _tapPosition;
+    private bool _isSwiping;
+
+    private bool _isMobile;
 
     private void Awake()
     {
-
+        _isMobile = Application.isMobilePlatform;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if (Input.touchCount > 0)
+        Touch touch = new Touch();
+
+        if (_isMobile)
         {
-            _touch = Input.GetTouch(0);
-            Debug.Log(_touch);
+            if (Input.touchCount > 0)
+            {
+                touch = Input.GetTouch(0);
+
+                if (touch.phase == TouchPhase.Began)
+                {
+                    _tapPosition = touch.position;
+                    _isSwiping = true;
+                }
+                else if (touch.phase == TouchPhase.Canceled || touch.phase == TouchPhase.Ended)
+                {
+                    ResetSwipe();
+                }
+            }
         }
+        else
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                _tapPosition = Input.mousePosition;
+                _isSwiping = true;
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                ResetSwipe();
+            }
+        }
+
+        if (_isSwiping)
+        {
+            Vector3 deltaPos;
+            Vector2 mousePos;
+
+            if (_isMobile)
+            {
+                mousePos = touch.position;
+            }
+            else
+            {
+                mousePos = Input.mousePosition;
+            }
+
+            deltaPos = new Vector3
+                (
+                    mousePos.x - _tapPosition.x,
+                    0f,
+                    mousePos.y - _tapPosition.y
+                ).normalized * _slideSpeed;
+
+            transform.position = new Vector3
+                (
+                    Mathf.Clamp(transform.position.x - deltaPos.x,
+                        -WorldBuilder.MAX_SPAWN_POSITION, WorldBuilder.MAX_SPAWN_POSITION),
+                    _defaultCameraPos.y,
+                    Mathf.Clamp(transform.position.z - deltaPos.z,
+                        -WorldBuilder.MAX_SPAWN_POSITION + _defaultCameraPos.z * 0.5f, 
+                        WorldBuilder.MAX_SPAWN_POSITION + _defaultCameraPos.z * 0.5f)
+                );
+
+            _tapPosition = mousePos;
+        }
+    }
+
+    private void ResetSwipe()
+    {
+        _isSwiping = false;
+        _tapPosition = Vector3.zero;
+
+        if (_isDebug) Debug.Log("Reset tap");
     }
 }

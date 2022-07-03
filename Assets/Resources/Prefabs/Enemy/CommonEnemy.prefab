@@ -157,8 +157,9 @@ MonoBehaviour:
     _scoreReward: 5
   _rigidbody: {fileID: 5707094621290241445}
   _health: {fileID: 2590208436436252733}
+  SpeedMultiplier: 1
   _animator: {fileID: -26201902373812258}
-  _bounceForce: 25
+  _bounceForce: 30
 --- !u!1001 &21977643321727473
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -187,12 +188,24 @@ PrefabInstance:
       value: 1.55
       objectReference: {fileID: 0}
     - target: {fileID: 8846771534630615830, guid: 171fcfe87d58ffe46bc81256e2dd9d3e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846771534630615830, guid: 171fcfe87d58ffe46bc81256e2dd9d3e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8846771534630615830, guid: 171fcfe87d58ffe46bc81256e2dd9d3e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846771534630615830, guid: 171fcfe87d58ffe46bc81256e2dd9d3e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846771534630615830, guid: 171fcfe87d58ffe46bc81256e2dd9d3e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 171fcfe87d58ffe46bc81256e2dd9d3e, type: 3}

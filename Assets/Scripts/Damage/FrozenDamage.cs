@@ -17,16 +17,18 @@ public sealed class FrozenDamage : Damage
 
     async private void FreezeTarget(IDamageable target)
     {
-        Rigidbody rigidbody = target.GetTransform().GetComponent<Rigidbody>();
         ParticleSystem particle = Instantiate(_frozenParticle, target.GetTransform());
+
+        Enemy enemy = target as Enemy;
+
+        float sm = enemy.SpeedMultiplier;
+        enemy.SpeedMultiplier = _booster.SpeedSlowMultiplier;
 
         for (int i = 0; i < (int)(_booster.SlowTime / _deltaTimeForDamage); i++)
         {
             if (target.GetTransform().gameObject.activeSelf)
             {
-                target.TakeDamage(_instantDamageValue);
-
-                if (rigidbody != null) rigidbody.velocity *= (_booster.SpeedSlowMultiplier);
+                target.TakeDamage(_instantDamageValue * _deltaTimeForDamage);
 
                 await Task.Delay((int)(_deltaTimeForDamage * 1000));
             }
@@ -37,6 +39,7 @@ public sealed class FrozenDamage : Damage
             }
         }
 
+        enemy.SpeedMultiplier = sm;
         Destroy(particle);
     }
 }
