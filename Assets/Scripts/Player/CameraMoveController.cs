@@ -12,6 +12,8 @@ public sealed class CameraMoveController : MonoBehaviour
 
     private Vector2 _tapPosition;
     private bool _isSwiping;
+    private float _timer;
+    [SerializeField][Range(0.05f, 0.2f)] private float _touchDelay;
 
     private bool _isMobile;
 
@@ -33,7 +35,13 @@ public sealed class CameraMoveController : MonoBehaviour
                 if (touch.phase == TouchPhase.Began)
                 {
                     _tapPosition = touch.position;
-                    _isSwiping = true;
+                }
+                else if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved)
+                {
+                    if (!_isSwiping)
+                        _timer += Time.deltaTime;
+                    if (_timer >= _touchDelay)
+                        _isSwiping = true;
                 }
                 else if (touch.phase == TouchPhase.Canceled || touch.phase == TouchPhase.Ended)
                 {
@@ -46,7 +54,13 @@ public sealed class CameraMoveController : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 _tapPosition = Input.mousePosition;
-                _isSwiping = true;
+            }
+            else if (Input.GetMouseButton(0))
+            {
+                if (!_isSwiping)
+                    _timer += Time.deltaTime;
+                if (_timer >= _touchDelay)
+                    _isSwiping = true;
             }
             else if (Input.GetMouseButtonUp(0))
             {
@@ -93,6 +107,7 @@ public sealed class CameraMoveController : MonoBehaviour
     {
         _isSwiping = false;
         _tapPosition = Vector3.zero;
+        _timer = 0f;
 
         if (_isDebug) Debug.Log("Reset tap");
     }

@@ -5,22 +5,31 @@ public sealed class Menu : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private Records _records;
     [SerializeField] private GameObject _credits;
-    [SerializeField] private NewRecord _newRecord; 
-
-    #region Scenes indexes
-    private readonly static int MAIN_MENU_SCENE = 0;
-    private readonly static int GAME_SCENE = 1;
-    #endregion
+    [SerializeField] private NewRecord _newRecord;
+    [SerializeField] private GameObject _mainMenu;
+    [SerializeField] private GameObject _gameMenu;
+    [SerializeField] private GameObject _worldBuilder;
+    [SerializeField] private GameObject _gameControls;
+    [SerializeField] private GameObject _startGameButton;
 
     #region Button functions
     public void StartGame()
     {
-        LoadScene(GAME_SCENE);
+        _gameControls.SetActive(true);
+        _worldBuilder.SetActive(true);
+        _gameMenu.SetActive(true);
+        _startGameButton.SetActive(true);
+        _mainMenu.SetActive(false);
     }
 
     public void OpenMainMenu()
     {
-        LoadScene(MAIN_MENU_SCENE);
+        _gameControls.SetActive(false);
+        _worldBuilder.SetActive(false);
+        _startGameButton.SetActive(false);
+        _mainMenu.SetActive(true);
+        _gameMenu.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     public void OpenRecords()
@@ -44,9 +53,4 @@ public sealed class Menu : MonoBehaviour
         Application.Quit();
     }
     #endregion
-
-    private void LoadScene(int index)
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(index);
-    }
 }

@@ -32,7 +32,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable, 
 
     [HideInInspector] public float SpeedMultiplier = 1f;
 
-    private void Start()
+    private void OnEnable()
     {
         EventBus.Subscribe(this);
     }

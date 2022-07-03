@@ -15,6 +15,9 @@ public static class EventBus
             if (!_subscribers.ContainsKey(type))
                 _subscribers[type] = new List<ISubscriber>();
 
+            if (_subscribers[type].Contains(subscriber))
+                continue;
+
             _subscribers[type].Add(subscriber);
         }
     }
@@ -57,7 +60,7 @@ public static class EventBus
             Debug.Log("Missing key! " + type);
             return;
         }
-
+        
         foreach (ISubscriber subscriber in _subscribers[type])
         {
             action.Invoke((TSubscriber)subscriber);

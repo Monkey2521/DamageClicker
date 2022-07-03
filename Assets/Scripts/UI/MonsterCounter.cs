@@ -23,8 +23,8 @@ public sealed class MonsterCounter : MonoBehaviour, IGameStartHandler, IEnemyKil
     {
         _monsterCount = 0;
 
-        _currentMonsterCount.text = "0";
-        _maxMonsterCount.text = " / 10";
+        _currentMonsterCount.text = "0"; 
+        _maxMonsterCount.text = " / 10"; 
 
         _currentMonsterCount.color = Color.green;
         _maxMonsterCount.color = Color.green;

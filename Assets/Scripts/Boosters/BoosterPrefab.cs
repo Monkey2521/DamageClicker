@@ -19,6 +19,7 @@ public sealed class BoosterPrefab : MonoBehaviour
     public void Init()
     {
         _timer = _booster.Cooldown;
+        _cooldownMask.enabled = true;
     }
 
     public void UpdateTimer()

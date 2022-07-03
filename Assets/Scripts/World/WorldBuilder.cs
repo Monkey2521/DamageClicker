@@ -28,9 +28,25 @@ public sealed class WorldBuilder : MonoBehaviour
 
     public static float MAX_SPAWN_POSITION { get; private set; }
 
-    private void Awake()
+    private void OnEnable()
     {
         StartCoroutine(ResetWorld());
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+
+        if (_ground.Count > 0)
+        {
+            foreach (GameObject ground in _ground)
+                Destroy(ground);
+            foreach (GameObject wall in _walls)
+                Destroy(wall);
+
+            _ground.Clear();
+            _walls.Clear();
+        }
     }
 
     private IEnumerator ResetWorld()
@@ -99,10 +115,5 @@ public sealed class WorldBuilder : MonoBehaviour
 
             yield return new WaitForSeconds(_deltaGroundSpawnTime);
         }
-    }
-
-    private void OnDisable()
-    {
-        StopAllCoroutines();    
     }
 }
