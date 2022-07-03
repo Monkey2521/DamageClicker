@@ -18,6 +18,7 @@ public sealed class NewRecord : MonoBehaviour
 
             return true;
         }
+
         else return false;
     }
 }

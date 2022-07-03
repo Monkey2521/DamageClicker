@@ -93,7 +93,7 @@ public sealed class EnemySpawner : MonoBehaviour, IGameStartHandler, IGameOverHa
     {
         Enemy enemy = _pool.PullObject() as Enemy;
 
-        if (enemy == null)
+        if (enemy == null || _pool.IsEmpty)
         {
             EventBus.Publish<IGameOverHandler>(handler => handler.OnGameOver());
             return;

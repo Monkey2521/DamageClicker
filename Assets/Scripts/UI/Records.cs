@@ -34,6 +34,8 @@ public sealed class Records : MonoBehaviour
             {
                 Record record = Instantiate(_recordPrefab, _recordsParent);
                 record.Init(score);
+
+                _records.Add(record);
             }
         }
     }

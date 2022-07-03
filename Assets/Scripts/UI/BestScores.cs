@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Best scores", fileName = "New best scores")]
 public class BestScores : ScriptableObject
 {
-    private List<BestScore> _bestScores = new List<BestScore>();
+    [SerializeField] private List<BestScore> _bestScores;
     public List<BestScore> Scores => _bestScores;
     public bool IsEmpty => _bestScores.Count == 0;
 
@@ -16,7 +16,26 @@ public class BestScores : ScriptableObject
 
         if (_bestScores.Count < 3)
         {
-            _bestScores.Add(newScore);
+            if (_bestScores.Count == 0)
+            {
+                _bestScores.Add(newScore);
+            }
+            else
+            {
+                int i = 0;
+                while (_bestScores[i].Time.IsBetter(newScore.Time) && i < 2)
+                    i++;
+
+                _bestScores.Insert(i, newScore);
+            }
+
+            foreach (BestScore score1 in _bestScores)
+            {
+                Debug.Log(score1.Time.GetTime());
+            }
+
+            SetPositions();
+
             return true;
         }
         else
@@ -28,6 +47,8 @@ public class BestScores : ScriptableObject
                     _bestScores.Insert(i, newScore);
                     _bestScores.Remove(_bestScores[MAX_SCORES]);
 
+                    SetPositions();
+
                     return true;
                 }
             }
@@ -35,13 +56,17 @@ public class BestScores : ScriptableObject
         }
     }
 
-    private void SortScores()
+    private void SetPositions()
     {
-
+        for(int i = 0; i < _bestScores.Count; i++)
+        {
+            _bestScores[i].SetPosition(i + 1);
+        }
     }
 }
 
-public struct BestScore
+[System.Serializable]
+public class BestScore
 {
     public int Position;
     public GameTime Time;
@@ -53,11 +78,18 @@ public struct BestScore
         Score = score;
         Position = 0;
     }
+
+    public void SetPosition(int index)
+    {
+        Position = index;
+        Debug.Log(index + " " + Position);
+    }
 }
 
-public struct GameTime
+[System.Serializable]
+public class GameTime
 {
-    private string _time;
+    [SerializeField] private string _time;
 
     private int _days; // ???
     private int _hours;
@@ -68,12 +100,13 @@ public struct GameTime
     readonly static int DAYS_DIVIDER = 86400;
     readonly static int HOURS_DIVIDER = 3600;
     readonly static int MINUTES_DIVIDER = 60;
+    readonly static char[] SEPARATOR = { ',' };
 
     public GameTime(float timeInSec)
     {
         int time = (int)timeInSec;
 
-        _milliseconds = (int)(timeInSec % time);
+        _milliseconds = (timeInSec - time).ToString().Split(SEPARATOR)[1][0] - '0'; // округление дробной части до 1 знака
 
         _days = time / DAYS_DIVIDER;
         time = time % DAYS_DIVIDER;
@@ -85,8 +118,8 @@ public struct GameTime
 
         _seconds = time % MINUTES_DIVIDER;
 
-        _time = (_days > 0 ? _days.ToString() + " days, " : "") +
-            (_hours > 0 ? _hours.ToString() + " hours, " : "") +
+        _time = (_days > 0 ? _days + " days, " : "") +
+            (_hours > 0 ? _hours + " hours, " : "") +
             _minutes + ":" + _seconds + "." + _milliseconds;
     }
 

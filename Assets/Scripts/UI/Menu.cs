@@ -31,19 +31,12 @@ public sealed class Menu : MonoBehaviour
 
     public void CheckRecords(float time, int score)
     {
-        if (_newRecord.CheckRecord(time, score))
-        {
-            _newRecord.gameObject.SetActive(true);
-        }
-        else
-        {
-            _newRecord.gameObject.SetActive(false);
-        }
+        _newRecord.gameObject.SetActive(_newRecord.CheckRecord(time, score));
     }
 
     public void OpenCredits()
     {
-
+        _credits.SetActive(true);
     }
 
     public void ExitGame()

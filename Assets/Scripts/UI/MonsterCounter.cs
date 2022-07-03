@@ -11,7 +11,7 @@ public sealed class MonsterCounter : MonoBehaviour, IGameStartHandler, IEnemyKil
 
     [SerializeField] private Text _scoreCount;
     private int _score;
-    public int TotalScore { get; private set; }
+    public int TotalScore => _score;
 
     private void Start()
     {
@@ -30,7 +30,6 @@ public sealed class MonsterCounter : MonoBehaviour, IGameStartHandler, IEnemyKil
         _maxMonsterCount.color = Color.green;
 
         _score = 0;
-        TotalScore = 0;
         _scoreCount.text = "0";
 
         _animator.SetBool("OnDanger", false);
@@ -79,7 +78,6 @@ public sealed class MonsterCounter : MonoBehaviour, IGameStartHandler, IEnemyKil
     private void AddScore(int score)
     {
         _score += score;
-        TotalScore += score;
 
         _scoreCount.text = _score.ToString();
     }

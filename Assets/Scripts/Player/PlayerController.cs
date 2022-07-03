@@ -15,9 +15,9 @@ public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKi
     [Header("UI settings")]
     [SerializeField] private GameObject _startGameButton;
     [SerializeField] private MonsterCounter _monsterCounter;
-    [SerializeField] private Menu _pauseMenu;
     [SerializeField] private Menu _gameOverMenu;
     [SerializeField] private GameObject _boostersMenu;
+    [SerializeField] private UnityEngine.UI.Text _timerText;
 
     private float _timer;
 
@@ -29,13 +29,15 @@ public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKi
     private void Update()
     {
         _timer += Time.deltaTime;
+
+        _timerText.text = new GameTime(_timer).GetTime();
     }
 
     public void Restart()
     {
         _startGameButton.gameObject.SetActive(true);
+        _timerText.gameObject.SetActive(false);
         _monsterCounter.gameObject.SetActive(false);
-        _pauseMenu.gameObject.SetActive(false);
         _boostersMenu.gameObject.SetActive(false);
         _gameOverMenu.gameObject.SetActive(false);
     }
@@ -46,6 +48,7 @@ public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKi
 
         _monsterCounter.gameObject.SetActive(true);
         _startGameButton.SetActive(false);
+        _timerText.gameObject.SetActive(true);
 
         _timer = 0;
 
@@ -68,12 +71,12 @@ public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKi
     {
         if (_isDebug) Debug.Log("GameOver");
 
-        _pauseMenu.gameObject.SetActive(false);
         _boostersMenu.gameObject.SetActive(false);
         _startGameButton.gameObject.SetActive(false);
+        _timerText.gameObject.SetActive(false);
 
         _gameOverMenu.gameObject.SetActive(true);
         _gameOverMenu.CheckRecords(_timer, _monsterCounter.TotalScore);
+        _monsterCounter.gameObject.SetActive(false);
     }
-
 }
