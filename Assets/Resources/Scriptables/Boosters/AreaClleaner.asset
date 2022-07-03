@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: AreaClleaner
   m_EditorClassIdentifier: 
   _isDebug: 0
+  _icon: {fileID: 21300000, guid: 567006349c8974855b45b7352454b01f, type: 3}
   _name: Area cleaner
-  _instantDamageValue: 1000
-  _damagePrefab: {fileID: 0}
-  _areaRange: 500
-  _damageLifetime: 0
+  _cooldown: 60

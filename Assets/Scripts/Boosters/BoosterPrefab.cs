@@ -13,6 +13,11 @@ public sealed class BoosterPrefab : MonoBehaviour
     {
         _booster = booster;
         _icon.sprite = _booster.Icon;
+        Init();
+    }
+
+    public void Init()
+    {
         _timer = _booster.Cooldown;
     }
 

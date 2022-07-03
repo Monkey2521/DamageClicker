@@ -1,14 +1,18 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKilledHandler, IEnemyClickedHandler
+public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKilledHandler, IEnemyClickedHandler,
+    IFrozenAttackHandler, IFireAttackHandler
 {
     [Header("Debug settings")]
     [SerializeField] private bool _isDebug;
 
     [Header("Settings")]
     [SerializeField][Range(0.01f, 0.2f)] private float _difficultyUpgradePerMonster;
-    [SerializeField] private Damage _damage;
+    [SerializeField] private Damage _baseDamage;
+
+    private List<Damage> _additionalDamage = new List<Damage>();
 
     private static float _difficultyMultiplier;
     public static float DifficultyMultiplier => _difficultyMultiplier;
@@ -51,10 +55,13 @@ public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKi
         _monsterCounter.gameObject.SetActive(true);
         _startGameButton.SetActive(false);
         _timerText.gameObject.SetActive(true);
+        _boostersMenu.gameObject.SetActive(true);
 
         _timer = 0;
 
         EventBus.Publish<IGameStartHandler>(handler => handler.OnGameStart());
+
+        _additionalDamage.Clear();
     }
 
     public void OnEnemyKilled(Enemy enemy) // увеличение сложности
@@ -66,7 +73,25 @@ public sealed class PlayerController : MonoBehaviour, IGameOverHandler, IEnemyKi
     {
         if (_isDebug) Debug.Log(enemy);
 
-        _damage.MakeDamage(enemy);
+        _baseDamage.MakeDamage(enemy);
+
+        if (_additionalDamage.Count > 0)
+        {
+            foreach (Damage damage in _additionalDamage)
+                damage.MakeDamage(enemy);
+
+            _additionalDamage.Clear();
+        }
+    }
+
+    public void OnFireAttack(Damage damage)
+    {
+        _additionalDamage.Add(damage);
+    }
+
+    public void OnFrozenAttack(Damage damage)
+    {
+        _additionalDamage.Add(damage);
     }
 
     public void OnGameOver()

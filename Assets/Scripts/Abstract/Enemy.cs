@@ -30,6 +30,13 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable, 
 
     public ObjectPool Pool { get; set; }
 
+    public float SpeedMultiplier = 1f;
+
+    private void Start()
+    {
+        EventBus.Subscribe(this);
+    }
+
     public virtual void Init(float difficultyMultiplier)
     {
         _stats.Init(difficultyMultiplier);
@@ -41,7 +48,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable, 
         _targetPosition = new Vector3(_targetPosition.x, transform.position.y, _targetPosition.z);
         transform.LookAt(_targetPosition);
 
-        Vector3 velocity = transform.TransformDirection(Vector3.forward) * Speed;
+        Vector3 velocity = transform.TransformDirection(Vector3.forward) * Speed * SpeedMultiplier;
         
         _rigidbody.velocity = new Vector3(velocity.x, _rigidbody.velocity.y, velocity.z);
     }
@@ -87,7 +94,10 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IMoveable, IPoolable, 
 
     public void OnAreaCleaned()
     {
-        EventBus.Publish<IEnemyKilledHandler>(handler => handler.OnEnemyKilled(this));
-        ReturnToPool();
+        if (gameObject.activeSelf)
+        {
+            EventBus.Publish<IEnemyKilledHandler>(handler => handler.OnEnemyKilled(this));
+            ReturnToPool();
+        }
     }
 }

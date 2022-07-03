@@ -10,13 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c196df55f42375f4b99fcbd29c5ecdc8, type: 3}
-  m_Name: FrozenDamage
+  m_Name: Frozen damage
   m_EditorClassIdentifier: 
   _isDebug: 0
-  _name: Speed slower
+  _name: Frozen damage
   _instantDamageValue: 1
-  _damagePrefab: {fileID: 0}
-  _areaRange: 1
-  _damageLifetime: 1.5
-  _speedSlowMultiplier: 0.25
-  _slowTime: 3
+  _booster: {fileID: 11400000, guid: bc600c958f5255d4e8948dfb92807a9b, type: 2}
+  _deltaTimeForDamage: 0.05

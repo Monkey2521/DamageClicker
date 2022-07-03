@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SpawnerFreezer
   m_EditorClassIdentifier: 
   _isDebug: 0
-  _name: 
-  _freezingTime: 0
-  _spawner: {fileID: 0}
+  _icon: {fileID: 21300000, guid: cfa20a749489b43779f634652fea362f, type: 3}
+  _name: Spawner freezer
+  _cooldown: 30
+  _freezingTime: 3

@@ -10,13 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14afde2028e9a28488820d7c64db012d, type: 3}
-  m_Name: FireDamage
+  m_Name: Fire damage
   m_EditorClassIdentifier: 
   _isDebug: 0
-  _name: FIRE
-  _instantDamageValue: 5
-  _damagePrefab: {fileID: 0}
-  _areaRange: 1
-  _damageLifetime: 2
-  _fireDamagePerSecond: 7
-  _burningTime: 3
+  _name: Fire damage
+  _instantDamageValue: 3
+  _booster: {fileID: 11400000, guid: 2c5afb5df213b0d49b56794adc9b857e, type: 2}
+  _deltaTimeForDamage: 0.1
