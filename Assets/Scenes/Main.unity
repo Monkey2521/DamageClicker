@@ -2270,7 +2270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isDebug: 0
-  _slideSpeed: 1
+  _slideSpeed: 0.43
   _defaultCameraPos: {x: 0, y: 13.43, z: -13.43}
   _touchDelay: 0.1
 --- !u!1 &985081362
